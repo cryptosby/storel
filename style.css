@@ -1,0 +1,16 @@
+/* style.css */
+/* Aquí va TODO el contenido de la etiqueta <style> de tu archivo original. */
+/* Ej: */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    transition: background-color .3s;
+}
+.dark .text-gray-600 {
+    color: #a0aec0;
+}
+/* ... y todo lo demás ... */
+.gallery-image.active {
+    box-shadow: 0 0 0 3px #4f46e5;
+}
+/* Asegúrate de que todos los estilos están aquí */
