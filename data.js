@@ -52,4 +52,4 @@ const posts = [
 ];
 
 const paymentButtonsDelay = 5000; // Retraso en milisegundos (5 segundos)
-const isAdmin = false; // Mantenido para pruebas de interfaz admin.
+const isAdmin = true; // Mantenido para pruebas de interfaz admin.
