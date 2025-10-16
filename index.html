@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfinityScroll - Social Digital Marketplace</title>
-    <meta name="description" content="Descubre un marketplace digital único. Explora y compra contenido creativo como e-books, plantillas y tutoriales.">
-    <meta name="keywords" content="digital marketplace, social store, archivos digitales, e-books, tutoriales, plantillas, minimalista">
+    <meta name="description" content="Descubre una experiencia única de mercado digital. Explora y comparte contenido creativo como fotos, videos y e-books en una plataforma social única.">
     <meta property="og:title" content="InfinityScroll - Social Digital Marketplace">
+    <meta property="og:description" content="Explora un mercado digital único para vender y comprar archivos creativos.">
+    <meta property="og:image" content="https://placehold.co/1200x630/2C2E35/E5E5E5?text=InfinityScroll">
     <meta property="og:url" content="https://your-store-github.io">
     <meta name="twitter:card" content="summary_large_image">
 
@@ -15,47 +16,64 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
 
-    <header class="shadow-md bg-white dark:bg-gray-800 sticky top-0 z-10">
-        <div class="max-w-xl mx-auto flex justify-between items-center p-4">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Social Store</h1>
-            <div class="flex space-x-4 items-center">
-                <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-sm">
-                    A
-                </div>
+    <div class="ad-banner text-xs sm:text-sm">
+        Publicidad: ¡Tu anuncio aquí!
+    </div>
+    
+    <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
+        <div class="container flex justify-between items-center space-x-4 py-4">
+            <div class="relative w-3/4 sm:w-2/3">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="search-input" placeholder="Buscar productos por título, descripción o #tags..." 
+                       class="w-full p-2 pl-10 border border-gray-300 rounded-full dark:bg-gray-700 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                       onkeyup="filterPosts(this.value)">
             </div>
+            
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <i class="fas fa-moon text-lg"></i>
+            </button>
         </div>
     </header>
 
-    <div class="max-w-xl mx-auto p-4 bg-white dark:bg-gray-800 shadow-lg mt-4 rounded-lg">
-        <input type="text" id="search-input" placeholder="Buscar por título, descripción o etiqueta..." 
-               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white transition">
-        <div id="filter-tags-container" class="flex flex-wrap gap-2 mt-3">
+    <main class="container py-8">
+        <div class="ad-banner text-xs sm:text-sm my-6">
+            Publicidad: Banner bajo la barra de búsqueda.
+        </div>
+        
+        <div id="product-feed" class="space-y-10">
             </div>
-    </div>
-
-    <main class="max-w-xl mx-auto p-4">
-        <div id="feed-container" class="space-y-6">
-            </div>
-        <div class="text-center p-4">
-             <button id="load-more-button" class="px-4 py-2 bg-indigo-500 text-white font-semibold rounded-full hover:bg-indigo-600 transition">Cargar más productos</button>
+        
+        <div id="no-results" class="card text-center p-8 hidden">
+            <h3 class="text-xl font-semibold">No se encontraron productos</h3>
+            <p class="text-gray-500 mt-2">Intenta con otras palabras clave o #tags.</p>
         </div>
     </main>
+
+    <footer class="bg-white dark:bg-gray-800 mt-10 shadow-sm">
+        <div class="container py-8 text-center text-gray-600 dark:text-gray-400">
+            <div class="ad-banner text-xs sm:text-sm mb-6">
+                Publicidad: Banner final!
+            </div>
+            <div class="flex flex-wrap justify-center space-x-4 sm:space-x-8 mb-4 text-sm font-medium">
+                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
+                <a href="#faq" class="hover:text-blue-600 transition-colors">FAQ</a>
+                <a href="#privacy-policy" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
+                <a href="#terms" class="hover:text-blue-600 transition-colors">Terms of Service</a>
+                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+            <p>&copy; 2024 InfinityScroll. All rights reserved.</p>
+        </div>
+    </footer>
     
     <div id="message-modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-2xl max-w-sm w-full">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Mensaje del Sistema</h3>
-            <p id="message-modal-text" class="text-gray-600 dark:text-gray-300 mb-6">Mensaje.</p>
-            <button onclick="document.getElementById('message-modal-overlay').classList.add('hidden')" 
-                    class="w-full py-2 bg-indigo-500 text-white font-semibold rounded-lg hover:bg-indigo-600 transition">Entendido</button>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl text-center">
+            <p id="message-modal-text" class="text-lg font-semibold mb-4"></p>
+            <button onclick="document.getElementById('message-modal-overlay').classList.add('hidden')" class="bg-blue-600 text-white px-4 py-2 rounded-md">Cerrar</button>
         </div>
     </div>
 
-    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
