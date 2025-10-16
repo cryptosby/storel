@@ -9,10 +9,10 @@ const posts = [
         id: 1,
         title: "Ebook Avanzado de Marketing Digital 2024",
         description: "Guía completa para dominar estrategias SEO, redes sociales y publicidad PPC. Incluye plantillas descargables.",
-        mediaUrl: "https://images.unsplash.com/photo",
+        mediaUrl: "https://youtu.be/pMe6te3qpR8/mi-video.mp4?raw=1",
         // NUEVO: Array para la galería de previsualización
         galleryUrls: [
-            "https://youtu.be/pMe6te3qpR8",
+            "https://youtu.be/pMe6te3qpR8/mi-video.mp4?raw=1",
             "https://placehold.co/800x600/2C2E35/E5E5E5?text=Infograf%C3%ADa+Incluida",
             "https://placehold.co/800x600/2C2E35/E5E5E5?text=Testimonios"
         ],
