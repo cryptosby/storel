@@ -12,7 +12,7 @@ const posts = [
         mediaUrl: "https://youtu.be/pMe6te3qpR8/mi-video.mp4?raw=1",
         // NUEVO: Array para la galería de previsualización
         galleryUrls: [
-            "https://youtu.be/pMe6te3qpR8/mi-video.mp4?raw=1",
+            "https://placehold.co/800x600/2C2E35/E5E5E5?text=Vista+de+Cap%C3%ADtulo",
             "https://placehold.co/800x600/2C2E35/E5E5E5?text=Infograf%C3%ADa+Incluida",
             "https://placehold.co/800x600/2C2E35/E5E5E5?text=Testimonios"
         ],
