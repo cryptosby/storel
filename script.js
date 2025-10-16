@@ -1,308 +1,442 @@
-// script.js
+// =================================================================
+// CONFIGURACIÓN Y DATA ESTATICA
+// =================================================================
 
-// Nota: Las variables 'posts', 'paymentButtonsDelay', 'isAdmin' vienen de data.js
+// Configuración de botones de pago con retrasos (permanece)
+const paymentButtonsConfig = [
+    { id: 'whatsapp', show: true, delay: 5000, icon: 'fab fa-whatsapp', label: 'WhatsApp', color: 'hover:bg-green-500' },
+    { id: 'telegram', show: true, delay: 10000, icon: 'fab fa-telegram-plane', label: 'Telegram', color: 'hover:bg-blue-500' },
+    { id: 'paypal', show: true, delay: 15000, icon: 'fab fa-paypal', label: 'Paypal', color: 'hover:bg-blue-600' },
+    { id: 'bank', show: false, delay: 20000, icon: 'fas fa-university', label: 'Bank', color: 'hover:bg-gray-600' },
+    { id: 'donate', show: true, delay: 25000, icon: 'fas fa-gift', label: 'Gracias', color: 'hover:bg-orange-500' },
+    { id: 'crypto', show: false, delay: 30000, icon: 'fas fa-bitcoin', label: 'Crypto', color: 'hover:bg-yellow-500' }
+];
 
-// Helper para guardar los posts (solo para simular persistencia en estático)
-function savePostsToStorage() {
-    localStorage.setItem('socialStorePosts', JSON.stringify(posts));
-}
-
-// Helper para cargar los posts desde el almacenamiento local
-function loadPostsFromStorage() {
-    const storedPosts = localStorage.getItem('socialStorePosts');
-    if (storedPosts) {
-        // Cargar likes/comentarios actualizados, pero mantener la estructura original hardcodeada
-        // para asegurar que los nuevos campos (galleryUrls, tags) no se pierdan.
-        const storedData = JSON.parse(storedPosts);
-        storedData.forEach(storedPost => {
-            const originalPost = posts.find(p => p.id === storedPost.id);
-            if (originalPost) {
-                originalPost.likes = storedPost.likes;
-                originalPost.comments = storedPost.comments;
-            }
-        });
+// Carga los posts desde localStorage o usa los valores por defecto
+// La data cargada en localStorage por el "modo administrador" será la que se muestre,
+// pero los nuevos posts deben agregarse manualmente aquí.
+let posts = JSON.parse(localStorage.getItem('infinityScrollPosts')) || [
+    {
+        id: 1,
+        user: 'Pro User',
+        userImage: 'https://placehold.co/40x40/94a3b8/e2e8f0?text=U',
+        title: 'Creative Photography "Inner Cosmos"',
+        description: 'Un viaje visual a través de la galaxia. Perfecto para fondos de pantalla o impresiones de alta calidad. Archivo PNG.',
+        mediaUrl: 'https://placehold.co/800x600/1e293b/d4d4d8?text=Inner+Cosmos', // Usamos mediaUrl
+        tags: ['foto', 'cosmos', 'galaxia', 'png', 'wallpaper', 'arte'], // NUEVO CAMPO PARA BUSQUEDA
+        fileUrl: 'https://placehold.co/600x800/1e293b/d4d4d8?text=Inner+Cosmos', // Enlace de pago/descarga
+        fileType: 'image',
+        fileSize: '2.4 MB',
+        price: '20',
+        isFree: false,
+        showFileInfo: true,
+        likes: 124,
+        comments: [
+            { id: 101, user: 'Ana G.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=A', text: '¡Increíble! Amo la profundidad de los colores.', date: '2024-09-05', replies: [] },
+            { id: 102, user: 'Luis V.', userImage: 'https://placehold.co/30x30/bfdbfe/1d4ed8?text=L', text: 'Compré la foto, vale cada centavo. Excelente trabajo!', date: '2024-09-05', replies: [] }
+        ]
+    },
+    {
+        id: 2,
+        user: 'Ebook Creator',
+        userImage: 'https://placehold.co/40x40/94a3b8/e2e8f0?text=E',
+        title: 'Guía de Marketing Digital para Principiantes',
+        description: 'Ebook en PDF de 50 páginas con estrategias y herramientas clave. Aprende a promocionar tu negocio online.',
+        mediaUrl: 'https://placehold.co/800x600/10b981/e5e7eb?text=Ebook+Marketing', // URL de la cubierta
+        tags: ['ebook', 'marketing', 'pdf', 'negocio', 'guia', 'online'], // NUEVO CAMPO PARA BUSQUEDA
+        fileUrl: 'https://ejemplo.payhip.com/p/marketing-guide', // Enlace de pago/descarga
+        fileType: 'ebook',
+        fileSize: '15.2 MB',
+        price: '15.99',
+        isFree: false,
+        showFileInfo: true,
+        likes: 45,
+        comments: []
     }
+];
+
+const productFeed = document.getElementById('product-feed');
+const noResultsMessage = document.getElementById('no-results');
+
+// Reemplazamos la función de guardado para que siga funcionando con likes y comments.
+function savePostsToStorage() {
+    localStorage.setItem('infinityScrollPosts', JSON.stringify(posts));
 }
 
+// =================================================================
+// LÓGICA DE RENDERIZADO Y FILTRADO (CLAVE DEL CAMBIO)
+// =================================================================
 
-// ============== CORE: RENDERIZADO DEL FEED COMPLETO Y REFACTORING (Punto 2a, 4b, 5b) =================
+// Nueva función para renderizar TODOS los posts (reemplaza renderSinglePost)
+function renderAllPosts(filteredPosts = posts) {
+    if (!productFeed) return;
+    
+    productFeed.innerHTML = '';
+    
+    if (filteredPosts.length === 0) {
+        noResultsMessage.classList.remove('hidden');
+        return;
+    } else {
+        noResultsMessage.classList.add('hidden');
+    }
 
-// Variable de estado para el filtrado
-let currentFilterTag = null;
+    filteredPosts.forEach(post => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        // --- AD 2: Banner dentro de la tarjeta (superior) ---
+        const ad2 = `<div class="ad-banner text-xs sm:text-sm">Publicidad: Banner superior en post!</div>`;
 
-// Función que crea el elemento HTML de un solo post (antes era renderSinglePost)
-function createPostElement(post) {
-    const postElement = document.createElement('div');
-    postElement.id = `post-${post.id}`;
-    postElement.className = 'bg-white dark:bg-gray-800 shadow-xl rounded-xl overflow-hidden transition-all duration-300';
-    postElement.setAttribute('aria-label', `Publicación: ${post.title}`); // Accesibilidad
+        // Generar botones de pago basados en la configuración
+        const paymentButtons = paymentButtonsConfig.filter(btn => btn.show).map(btn => `
+            <button id="${btn.id}-button-${post.id}" class="buy-button hidden bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white ${btn.color} hover:text-white">
+                <i class="${btn.icon} text-lg"></i>
+                <span>${btn.label}</span>
+                <span class="text-xs">${btn.label === 'Gracias' ? 'Donativo' : 'Comprar Ahora'}</span>
+            </button>
+        `).join('');
 
-    // Lógica para el estado persistente del Like (Punto 4c)
-    const hasUserLiked = localStorage.getItem(`post-${post.id}-liked`) === 'true';
-    const heartClass = hasUserLiked ? 'text-red-500' : 'text-gray-400 dark:text-gray-500';
+        // --- Contenido del Post ---
+        card.innerHTML += ad2;
 
-    // Generación de la galería y placeholder (Punto 2b)
-    const galleryHtml = post.galleryUrls.map((url, index) => `
-        <img src="${url}" 
-             alt="${post.title} - Vista ${index + 2}" 
-             class="gallery-image w-10 h-10 object-cover rounded-md cursor-pointer ${index === 0 ? 'active' : ''}" 
-             data-main-src="${post.mediaUrl}"
-             data-gallery-src="${url}">
-    `).join('');
-
-    const tagsHtml = post.tags.map(tag => `
-        <button class="tag-button text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-700 dark:text-indigo-100 transition hover:opacity-80" data-tag="${tag}">
-            #${tag}
-        </button>
-    `).join('');
-
-
-    postElement.innerHTML = `
-        <div class="p-5">
-            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2" id="post-title-${post.id}">${post.title}</h2>
-            <div class="flex flex-wrap gap-2 mb-4">${tagsHtml}</div> 
-            <p class="text-gray-600 dark:text-gray-300 mb-4" id="post-description-${post.id}">${post.description}</p>
-        </div>
-
-        <div class="relative w-full aspect-video bg-gray-200 dark:bg-gray-700">
-            <img src="${post.mediaUrl}" alt="${post.title} - Imagen Principal" id="main-media-${post.id}" class="w-full h-full object-cover">
-            <span class="absolute top-2 left-2 px-3 py-1 bg-black bg-opacity-60 text-white text-sm rounded-full">${post.isFree ? 'Gratis' : `$${post.price.toFixed(2)}`}</span>
-        </div>
-
-        <div class="p-4 flex gap-3 overflow-x-auto border-b border-gray-200 dark:border-gray-700">
-            <img src="${post.mediaUrl}" alt="${post.title} - Vista 1" 
-                 class="gallery-image w-10 h-10 object-cover rounded-md cursor-pointer active" 
-                 data-main-src="${post.mediaUrl}">
-            ${galleryHtml}
-        </div>
-
-        <div class="p-5 border-b border-gray-200 dark:border-gray-700">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-4 text-gray-600 dark:text-gray-400">
-                    <button class="like-button flex items-center space-x-1 transition hover:text-red-500" data-post-id="${post.id}">
-                        <i class="fas fa-heart ${heartClass}"></i>
-                        <span id="likes-count-${post.id}">${post.likes}</span>
-                    </button>
-                    <div class="flex items-center space-x-1">
-                        <i class="fas fa-comment"></i>
-                        <span>${post.comments}</span>
+        card.innerHTML += `
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="flex items-center space-x-3">
+                    <img class="w-12 h-12 rounded-full object-cover" src="${post.userImage}" alt="Profile">
+                    <div class="flex flex-col w-full">
+                        <p class="text-lg font-semibold">${post.user}</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="text-right">
-                    ${isAdmin ? 
-                        `
-                        <span class="text-sm text-gray-500 dark:text-gray-400">Precio (Admin):</span>
-                        <input type="number" step="0.01" value="${post.price.toFixed(2)}" class="price-input text-xl font-bold text-indigo-600 dark:text-indigo-400 w-24 p-1 rounded bg-gray-100 dark:bg-gray-700" data-post-id="${post.id}">
-                        ` 
-                        : 
-                        `
-                        <span class="text-sm text-gray-500 dark:text-gray-400">Precio:</span>
-                        <span class="text-xl font-bold text-indigo-600 dark:text-indigo-400">$${post.price.toFixed(2)}</span>
-                        `
-                    }
+            <h2 class="text-2xl font-bold">${post.title}</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">${post.description}</p>
+            
+            <div class="mb-4 text-xs text-blue-500">
+                ${post.tags ? post.tags.map(tag => `<span class="mr-2 opacity-75 hover:opacity-100 cursor-pointer">#${tag}</span>`).join('') : ''}
+            </div>
+
+            <div class="w-full rounded-lg overflow-hidden my-6">
+                <div class="media-container">
+                    <div class="media-content">
+                        ${getPostMedia(post.mediaUrl, post.fileType, post.title)}
+                    </div>
                 </div>
             </div>
-            
-            ${!post.isFree ? `
-                <a href="${post.fileUrl}" target="_blank" 
-                   class="main-purchase-button mt-4 w-full flex items-center justify-center py-3 bg-green-500 text-white font-bold rounded-lg shadow-md hover:bg-green-600 transition"
-                   data-payment-type="main"
-                   data-post-id="${post.id}">
-                    <i class="fas fa-shopping-bag mr-2"></i> COMPRAR PRODUCTO DIGITAL
-                </a>
-                <p class="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">Serás redirigido para completar el pago y la descarga automática.</p>
-            ` : ''}
 
-            ${post.isFree && post.fileUrl ? `
-                <a href="${post.fileUrl}" target="_blank" 
-                   class="mt-4 w-full flex items-center justify-center py-3 bg-indigo-500 text-white font-bold rounded-lg shadow-md hover:bg-indigo-600 transition"
-                   data-payment-type="free"
-                   data-post-id="${post.id}">
-                    <i class="fas fa-download mr-2"></i> DESCARGA GRATUITA
-                </a>
-            ` : ''}
-            
-            ${!post.isFree ? `
-                <div id="payment-options-${post.id}" class="flex flex-col space-y-2 mt-4 hidden" data-delay="${paymentButtonsDelay}">
-                    <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300">Otras Opciones de Pago:</h4>
-                    ${post.paymentLinks.paypal ? `<a href="${post.paymentLinks.paypal}" target="_blank" class="py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center"><i class="fab fa-paypal mr-2"></i> PayPal</a>` : ''}
-                    ${post.paymentLinks.whatsapp ? `<a href="${post.paymentLinks.whatsapp}" target="_blank" class="py-2 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center justify-center"><i class="fab fa-whatsapp mr-2"></i> WhatsApp</a>` : ''}
-                    ${post.paymentLinks.telegram ? `<a href="${post.paymentLinks.telegram}" target="_blank" class="py-2 px-4 bg-blue-400 text-white rounded-lg hover:bg-blue-500 flex items-center justify-center"><i class="fab fa-telegram-plane mr-2"></i> Telegram</a>` : ''}
-                    ${post.paymentLinks.donativo ? `<a href="${post.paymentLinks.donativo}" target="_blank" class="py-2 px-4 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 flex items-center justify-center"><i class="fas fa-hand-holding-usd mr-2"></i> Donativo</a>` : ''}
-                    ${post.paymentLinks.cryptos ? `<a href="${post.paymentLinks.cryptos}" target="_blank" class="py-2 px-4 bg-gray-600 text-white rounded-lg hover:bg-gray-700 flex items-center justify-center"><i class="fas fa-bitcoin mr-2"></i> Cryptos</a>` : ''}
-                    ${post.paymentLinks.cuentaBancaria ? `<div class="py-2 px-4 bg-red-100 text-red-700 rounded-lg text-center font-medium"><i class="fas fa-university mr-2"></i> Cuenta Bancaria (Contacto manual)</div>` : ''}
+            <div id="file-info-card-${post.id}" class="file-info-card ${(!post.fileSize || !post.showFileInfo) ? 'hidden' : ''}">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-300">Información del Archivo</h4>
+                        <p class="text-sm text-blue-600 dark:text-blue-400">Tipo: ${getFileTypeText(post.fileType)} | Tamaño: ${post.fileSize || 'Desconocido'}</p>
+                    </div>
+                    ${(post.isFree && post.fileUrl) ? `<a href="${post.fileUrl}" download class="bg-green-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-600 transition-colors">Descarga GRATIS</a>` : ''}
                 </div>
-            ` : ''}
+            </div>
 
-        </div>
-    `;
-    return postElement;
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-2xl font-bold ${post.isFree ? 'text-green-600' : 'text-blue-600'}">${post.isFree ? 'GRATIS' : '$' + post.price}</span>
+           
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleLike(${post.id}, this)" class="like-button text-gray-400 dark:text-gray-500 hover:text-red-500 transition-colors ${localStorage.getItem(`liked-${post.id}`) === 'true' ? 'text-red-500' : ''}">
+                        <i class="fas fa-heart text-2xl"></i>
+                    </button>
+                    <span class="likes-count text-lg font-medium">${post.likes}</span>
+                    <button onclick="sharePost(${post.id})" class="text-gray-400 dark:text-gray-500 hover:text-blue-500 transition-colors">
+                        <i class="fas fa-share-alt text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        
+        `; 
+        
+        // --- AD 3: Banner dentro de la tarjeta (inferior) ---
+        card.innerHTML += ad3;
+
+        // --- Ad 4 y Botones de Pago (El original Ad 4 está aquí) ---
+        card.innerHTML += `<div class="ad-banner text-xs sm:text-sm mt-6">Publicidad: Banner sobre botones!</div>`;
+        card.innerHTML += `
+            <div id="payment-buttons-container-${post.id}" class="payment-buttons-container flex justify-center space-x-2 my-4 flex-wrap gap-2">
+                ${paymentButtons}
+            </div>
+        `;
+        // --- AD 5: Banner debajo de los botones de pago ---
+        card.innerHTML += `<div class="ad-banner text-xs sm:text-sm">Publicidad: Banner bajo botones!</div>`;
+
+        // --- AD Adicional: Antes de comentarios ---
+        card.innerHTML += `<div class="ad-banner text-xs sm:text-sm mt-6">Publicidad: Banner antes de comentarios!</div>`;
+        
+        // --- Sección de Comentarios (Mantenida) ---
+        const commentsHtml = post.comments && post.comments.length > 0 ?
+            post.comments.map(c => `
+                <div id="comment-${c.id}" class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-2">
+                    <div class="flex items-center justify-between space-x-3 mb-1">
+                        <div class="flex items-center space-x-3">
+                            <img class="w-8 h-8 rounded-full object-cover" src="${c.userImage}" alt="Comment Profile">
+                            <span class="font-bold text-sm">${c.user}</span>
+                            <p class="text-xs text-gray-500">${new Date(c.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                        </div>
+                        </div>
+                    <p id="comment-text-${c.id}" class="text-gray-700 dark:text-gray-300 text-sm">${c.text}</p>
+                    <button onclick="toggleReplyBox(${c.id})" class="text-blue-500 text-xs mt-2 hover:underline">Responder</button>
+                    <div id="reply-box-${c.id}" class="hidden mt-2 flex space-x-2">
+                        <input type="text" id="reply-input-${c.id}" class="flex-grow p-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-sm" placeholder="Añadir respuesta...">
+                        <button onclick="addReply(${post.id}, ${c.id})" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm">Post</button>
+                    </div>
+                    <div id="replies-list-${c.id}" class="pl-4 mt-2 border-l border-gray-300 dark:border-gray-600 space-y-2">
+                        ${renderReplies(c.replies, post.id, c.id)}
+                    </div>
+                </div>
+            `).join('') : '<p class="text-sm text-gray-500 dark:text-gray-400">Sé el primero en comentar.</p>';
+
+        card.innerHTML += `
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold mb-4">Comentarios (${post.comments ? post.comments.length : 0})</h3>
+                <div id="comments-list-${post.id}" class="space-y-4">
+                    ${commentsHtml}
+                </div>
+                <div class="mt-4 flex space-x-2">
+                    <input type="text" id="comment-input-${post.id}" class="flex-grow p-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-sm" placeholder="Añadir un comentario...">
+                    <button onclick="addComment(${post.id})" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm">Post</button>
+                </div>
+            </div>
+        `;
+
+        productFeed.appendChild(card);
+        // Inicializar botones de pago para el post actual
+        initializePaymentButtons(post.id);
+    });
+}
+
+// =================================================================
+// NUEVA FUNCIONALIDAD: BÚSQUEDA Y FILTRADO
+// =================================================================
+
+function filterPosts(query) {
+    const term = query.toLowerCase().trim();
+    if (term.length < 3 && term.length > 0) {
+        // Muestra los posts si el término es muy corto, pero evita buscar en cada tecla
+        renderAllPosts(posts);
+        return;
+    }
+    
+    // Si el término está vacío, muestra todos los posts
+    if (term === '') {
+        renderAllPosts(posts);
+        return;
+    }
+
+    // Filtrar posts
+    const filtered = posts.filter(post => {
+        const titleMatch = post.title.toLowerCase().includes(term);
+        const descriptionMatch = post.description.toLowerCase().includes(term);
+        
+        // Buscar coincidencia en las etiquetas/tags
+        const tagsMatch = post.tags && post.tags.some(tag => tag.toLowerCase().includes(term));
+        
+        return titleMatch || descriptionMatch || tagsMatch;
+    });
+
+    renderAllPosts(filtered);
 }
 
 
-// Función principal para renderizar el feed (Punto 2a)
-function renderFeed(filterQuery = '', filterTag = null) {
-    const feedContainer = document.getElementById('feed-container');
-    if (!feedContainer) return;
-    feedContainer.innerHTML = ''; // Limpiar el contenedor
+// =================================================================
+// FUNCIONES AUXILIARES (SIMPLIFICADAS SIN ADMIN)
+// =================================================================
 
-    // 1. Filtrar los posts según la búsqueda y la etiqueta (Punto 2c)
-    let filteredPosts = posts.filter(post => {
-        const query = filterQuery.toLowerCase();
-        const matchesQuery = post.title.toLowerCase().includes(query) || 
-                             post.description.toLowerCase().includes(query);
-        const matchesTag = !filterTag || post.tags.includes(filterTag);
-        return matchesQuery && matchesTag;
-    });
+// Gets HTML for the file preview
+function getPostMedia(url, fileType, altText) {
+    if (!url) {
+        return `<div class="media-placeholder w-full h-full"><i class="fas fa-cloud-upload-alt text-4xl mb-4"></i><span>No hay archivo de previsualización</span></div>`;
+    }
 
-    // Simulación de "Cargar más"
-    const currentPostCount = feedContainer.children.length;
-    const postsToRender = filteredPosts.slice(currentPostCount, currentPostCount + 5); // Cargar 5 posts a la vez
-
-    postsToRender.forEach(post => {
-        const postElement = createPostElement(post);
-        feedContainer.appendChild(postElement);
-        initializePostInteractions(post.id);
-        updateSEO(post); // Actualizar SEO con el primer post del feed (Punto 5a)
-    });
-    
-    // Si no hay más posts para cargar
-    const loadMoreButton = document.getElementById('load-more-button');
-    if (loadMoreButton) {
-        if (filteredPosts.length <= feedContainer.children.length) {
-            loadMoreButton.classList.add('hidden');
-        } else {
-            loadMoreButton.classList.remove('hidden');
+    if (fileType) {
+        switch(fileType) {
+            case 'image':
+                return `<img src="${url}" onerror="this.onerror=null;this.src='https://placehold.co/600x800/e2e8f0/64748b?text=Image+not+available';" alt="${altText}" class="w-full h-auto max-h-96 object-contain rounded-lg">`;
+            case 'video':
+                return `<video controls class="w-full h-auto max-h-96 rounded-lg" style="background: #000;"><source src="${url}" type="video/mp4">Tu navegador no soporta el video.</video>`;
+            case 'audio':
+                return `<div class="w-full p-6 bg-gray-100 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center"><i class="fas fa-music text-4xl mb-4 text-blue-500"></i><audio controls class="w-full mt-4"><source src="${url}" type="audio/mpeg">Tu navegador no soporta el audio.</audio></div>`;
+            case 'pdf':
+                return `<div class="media-placeholder w-full h-full bg-red-50 dark:bg-red-900/20"><i class="fas fa-file-pdf text-4xl mb-4 text-red-500"></i><span>Documento PDF</span><p class="text-sm mt-2 text-center">Previsualización no disponible.</p></div>`;
+            case 'ebook':
+                return `<div class="media-placeholder w-full h-full bg-green-50 dark:bg-green-900/20"><i class="fas fa-book text-4xl mb-4 text-green-500"></i><span>E-Book</span></div>`;
+            case 'archive':
+                return `<div class="media-placeholder w-full h-full bg-yellow-50 dark:bg-yellow-900/20"><i class="fas fa-file-archive text-4xl mb-4 text-yellow-500"></i><span>Archivo Comprimido</span></div>`;
+            default:
+                return `<div class="media-placeholder w-full h-full"><i class="fas fa-file text-4xl mb-4"></i><span>Archivo Digital</span></div>`;
         }
+    }
+
+    // Fallback detection (similar a la original)
+    const extension = url.split('.').pop().toLowerCase().split('?')[0];
+    if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(extension)) {
+        return `<img src="${url}" onerror="this.onerror=null;this.src='https://placehold.co/600x800/e2e8f0/64748b?text=Image+not+available';" alt="${altText}" class="w-full h-auto max-h-96 object-contain rounded-lg">`;
+    } else if (['mp4', 'webm', 'mov', 'avi'].includes(extension)) {
+        return `<video controls class="w-full h-auto max-h-96 rounded-lg" style="background: #000;"><source src="${url}" type="video/mp4">Tu navegador no soporta el video.</video>`;
+    } else if (['mp3', 'wav', 'ogg', 'm4a'].includes(extension)) {
+        return `<div class="w-full p-6 bg-gray-100 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center"><i class="fas fa-music text-4xl mb-4 text-blue-500"></i><audio controls class="w-full mt-4"><source src="${url}" type="audio/mpeg">Tu navegador no soporta el audio.</audio></div>`;
+    } else {
+        return `<div class="media-placeholder w-full h-full"><i class="fas fa-file text-4xl mb-4"></i><span>Archivo Digital: ${extension.toUpperCase()}</span></div>`;
     }
 }
 
+// Renders replies for a comment (sin controles de admin)
+function renderReplies(replies, postId, commentId) {
+    if (!replies || replies.length === 0) return '';
+    return replies.map(r => `
+        <div class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg" data-reply-id="${r.id}">
+             <div class="flex items-center justify-between space-x-3 mb-1">
+                <div class="flex items-center space-x-3">
+                    <img class="w-6 h-6 rounded-full object-cover" src="${r.userImage}" alt="Reply Profile">
+                    <span class="font-bold text-xs">${r.user}</span>
+                    <p class="text-xs text-gray-500">${new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                </div>
+                </div>
+            <p id="reply-text-${r.id}" class="text-gray-700 dark:text-gray-300 text-xs">${r.text}</p>
+        </div>
+    `).join('');
+}
 
-// Función para inicializar interacciones (Punto 4b)
-function initializePostInteractions(postId) {
-    const postElement = document.getElementById(`post-${postId}`);
-    if (!postElement) return;
 
-    // 1. Control de Likes (Punto 4c)
-    const likeButton = postElement.querySelector('.like-button');
-    likeButton.addEventListener('click', () => {
-        const icon = likeButton.querySelector('i');
-        const countSpan = postElement.querySelector(`#likes-count-${postId}`);
-        let currentLikes = parseInt(countSpan.innerText);
+// Initialize payment buttons for each post card
+function initializePaymentButtons(postId) {
+    paymentButtonsConfig.forEach(buttonConfig => {
+        if (buttonConfig.show) {
+            setTimeout(() => {
+                const button = document.getElementById(`${buttonConfig.id}-button-${postId}`);
+                if (button) {
+                    button.classList.remove('hidden');
+                }
+            }, buttonConfig.delay);
+        }
+    });
 
-        if (icon.classList.contains('text-red-500')) {
-            // Quitar like
-            icon.classList.remove('text-red-500');
-            icon.classList.add('text-gray-400', 'dark:text-gray-500');
-            currentLikes--;
-            localStorage.setItem(`post-${postId}-liked`, 'false');
+    // Make container visible after first button appears
+    setTimeout(() => {
+        const container = document.getElementById(`payment-buttons-container-${postId}`);
+        if (container) {
+            container.classList.add('visible');
+        }
+    }, Math.min(...paymentButtonsConfig.filter(b => b.show).map(b => b.delay)));
+}
+
+
+// [Mantenidas] Funciones de Interacción (Like, Share, Comment, Reply)
+
+function toggleReplyBox(commentId) {
+    const replyBox = document.getElementById(`reply-box-${commentId}`);
+    if (replyBox) {
+        replyBox.classList.toggle('hidden');
+    }
+}
+
+function toggleLike(id, button) {
+    const post = posts.find(p => p.id === id);
+    if (post) {
+        const isLiked = localStorage.getItem(`liked-${id}`) === 'true';
+        if (isLiked) {
+            post.likes--;
+            localStorage.setItem(`liked-${id}`, 'false');
         } else {
-            // Dar like
-            icon.classList.remove('text-gray-400', 'dark:text-gray-500');
-            icon.classList.add('text-red-500');
-            currentLikes++;
-            localStorage.setItem(`post-${postId}-liked`, 'true');
+            post.likes++;
+            localStorage.setItem(`liked-${id}`, 'true');
         }
         
-        // Actualizar datos en el array y localStorage
-        const postData = posts.find(p => p.id === postId);
-        if (postData) {
-            postData.likes = currentLikes;
-            countSpan.innerText = currentLikes;
-            savePostsToStorage();
-        }
-    });
-
-    // 2. Control del Precio (Admin)
-    if (isAdmin) {
-        const priceInput = postElement.querySelector('.price-input');
-        priceInput.addEventListener('change', (e) => {
-            const newPrice = parseFloat(e.target.value);
-            const postData = posts.find(p => p.id === postId);
-            if (postData && !isNaN(newPrice)) {
-                postData.price = newPrice;
-                savePostsToStorage();
-                showMessage(`Precio del Post ${postId} actualizado a $${newPrice.toFixed(2)}`);
-            } else {
-                 showMessage(`Error: Precio inválido.`);
+        // Actualiza el botón y el contador
+        button.classList.toggle('text-red-500');
+        button.classList.toggle('text-gray-400', !isLiked);
+        document.querySelectorAll(`.likes-count`).forEach(el => {
+            // Encuentra el contador correcto en el post
+            if (el.closest('.card').querySelector(`[onclick="toggleLike(${id}, this)"]`)) {
+                 el.textContent = post.likes;
             }
         });
-    }
-    
-    // 3. Galería de Previsualización (Punto 2b)
-    const mainMedia = postElement.querySelector(`#main-media-${postId}`);
-    const galleryImages = postElement.querySelectorAll('.gallery-image');
-
-    galleryImages.forEach(img => {
-        img.addEventListener('click', () => {
-            // Cambiar la imagen principal
-            const newSrc = img.getAttribute('data-gallery-src') || img.getAttribute('data-main-src');
-            mainMedia.src = newSrc;
-
-            // Actualizar clase 'active'
-            galleryImages.forEach(i => i.classList.remove('active'));
-            img.classList.add('active');
-        });
-    });
-
-    // 4. Retraso de Botones de Pago Secundarios (Punto 3a)
-    const paymentOptions = postElement.querySelector(`#payment-options-${postId}`);
-    if (paymentOptions) {
-        const delay = parseInt(paymentOptions.getAttribute('data-delay'));
-        setTimeout(() => {
-            paymentOptions.classList.remove('hidden');
-        }, delay);
+        savePostsToStorage();
     }
 }
 
+function sharePost(id) {
+    const currentUrl = window.location.href;
+    const tempInput = document.createElement('textarea');
+    tempInput.value = currentUrl;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999);
 
-// ============== FILTRADO Y SEO =================
-
-// Genera y adjunta los botones de etiqueta al DOM (Punto 3c)
-function setupTagFilters() {
-    const allTags = posts.flatMap(post => post.tags);
-    const uniqueTags = [...new Set(allTags)];
-    const container = document.getElementById('filter-tags-container');
-
-    uniqueTags.forEach(tag => {
-        const button = document.createElement('button');
-        button.className = 'tag-filter-button text-sm px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-full text-gray-700 dark:text-gray-300 hover:bg-indigo-500 hover:text-white transition';
-        button.innerText = tag;
-        button.setAttribute('data-tag', tag);
-        container.appendChild(button);
-
-        button.addEventListener('click', () => {
-            // Lógica de toggle para el filtro
-            if (currentFilterTag === tag) {
-                currentFilterTag = null; // Desactivar filtro
-                button.classList.remove('bg-indigo-500', 'text-white');
-            } else {
-                currentFilterTag = tag; // Activar filtro
-                // Limpiar estilos de todos los botones
-                container.querySelectorAll('.tag-filter-button').forEach(btn => btn.classList.remove('bg-indigo-500', 'text-white'));
-                button.classList.add('bg-indigo-500', 'text-white');
-            }
-            document.getElementById('feed-container').innerHTML = ''; // Resetear el feed
-            renderFeed('', currentFilterTag);
-        });
-    });
+    try {
+        document.execCommand('copy');
+        showMessage('URL de la publicación copiada al portapapeles!');
+    } catch (err) {
+        console.error('Error al copiar al portapapeles:', err);
+        showMessage('Error al copiar la URL. Por favor, cópiala manualmente.');
+    } finally {
+        document.body.removeChild(tempInput);
+    }
 }
 
+function addComment(id) {
+    const commentInput = document.getElementById(`comment-input-${id}`);
+    const commentText = commentInput.value.trim();
+    if (commentText) {
+        const post = posts.find(p => p.id === id);
+        const newCommentId = Date.now();
+        const newComment = { 
+            id: newCommentId, 
+            user: 'Visitante', 
+            userImage: 'https://placehold.co/30x30/bfdbfe/1d4ed8?text=V', 
+            text: commentText, 
+            date: new Date().toISOString().split('T')[0], 
+            replies: [] 
+        };
+        post.comments.push(newComment);
+        savePostsToStorage();
+        renderAllPosts(); // Vuelve a renderizar para ver el nuevo comentario
+        commentInput.value = '';
+    }
+}
 
-// Actualizar Metadatos de SEO Dinámico (Punto 5a)
-function updateSEO(post) {
-    // Si tienes múltiples posts, el SEO de la página principal debe reflejar el contenido más relevante o el título del sitio.
-    // Aquí actualizamos con los datos del primer post solo como ejemplo.
-    if (document.title === 'InfinityScroll - Social Digital Marketplace') {
-        document.querySelector('meta[name="description"]').setAttribute('content', post.description);
-        document.querySelector('meta[property="og:title"]').setAttribute('content', post.title);
-        document.querySelector('meta[property="og:image"]').setAttribute('content', post.mediaUrl);
+function addReply(postId, commentId) {
+    const replyInput = document.getElementById(`reply-input-${commentId}`);
+    const replyText = replyInput.value.trim();
+    if (!replyText) return;
+
+    const post = posts.find(p => p.id === postId);
+    const parentComment = post.comments.find(c => c.id === commentId);
+
+    if (parentComment) {
+        const newReplyId = Date.now();
+        const newReply = { 
+            id: newReplyId, 
+            user: 'Visitante', 
+            userImage: 'https://placehold.co/24x24/fecaca/991b1b?text=R', 
+            text: replyText, 
+            date: new Date().toISOString().split('T')[0] 
+        };
+        parentComment.replies.push(newReply);
+        savePostsToStorage();
+        renderAllPosts(); // Vuelve a renderizar para ver la respuesta
+        toggleReplyBox(commentId);
     }
 }
 
 
-// Función para mostrar un modal de mensaje
+// [Mantenidas] Funciones Auxiliares
+
+function getFileTypeText(fileType) {
+    const typeMap = {
+        'image': 'Imagen',
+        'video': 'Video',
+        'audio': 'Audio',
+        'pdf': 'Documento PDF',
+        'ebook': 'E-Book',
+        'archive': 'Archivo Comprimido'
+    };
+    return typeMap[fileType] || 'Archivo Digital';
+}
+
 function showMessage(message) {
     const modal = document.getElementById('message-modal-overlay');
     const text = document.getElementById('message-modal-text');
@@ -311,9 +445,6 @@ function showMessage(message) {
         modal.classList.remove('hidden');
     }
 }
-
-
-// ============== INICIALIZACIÓN DE LA APLICACIÓN =================
 
 // Toggle Dark Mode
 const themeToggle = document.getElementById('theme-toggle');
@@ -331,28 +462,7 @@ if (themeToggle) {
     });
 }
 
-// Inicialización de la aplicación
+// Initial render on page load
 document.addEventListener('DOMContentLoaded', function() {
-    loadPostsFromStorage();
-    setupTagFilters();
-    renderFeed(); // Carga inicial
-    
-    // Lógica de búsqueda (Punto 2c)
-    const searchInput = document.getElementById('search-input');
-    searchInput.addEventListener('input', (e) => {
-        // Limpiar el filtro de etiquetas al usar la búsqueda
-        currentFilterTag = null;
-        document.querySelectorAll('.tag-filter-button').forEach(btn => btn.classList.remove('bg-indigo-500', 'text-white'));
-        
-        document.getElementById('feed-container').innerHTML = ''; // Resetear el feed
-        renderFeed(e.target.value);
-    });
-
-    // Lógica de "Cargar más"
-    const loadMoreButton = document.getElementById('load-more-button');
-    if (loadMoreButton) {
-        loadMoreButton.addEventListener('click', () => {
-            renderFeed(searchInput.value, currentFilterTag);
-        });
-    }
+    renderAllPosts();
 });
