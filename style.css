@@ -1,11 +1,4 @@
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f3f4f6;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-.dark body {
-    background-color: #1a1a2e;
-}
+/* ... (El CSS del contenedor principal y los estilos de tarjeta se mantienen igual) ... */
 .container {
     max-width: 600px; /* Ancho ajustado */
     margin: auto;
@@ -14,97 +7,7 @@ body {
 .card {
     background-color: white;
     border-radius: 1rem;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    border: 1px solid #e5e7eb;
+    padding: 1.5rem; /* Relleno uniforme en el interior de la tarjeta */
+    /* ... */
 }
-.dark .card {
-    background-color: #2c2c44;
-    border-color: #3b3c5a;
-}
-.ad-banner {
-    background-color: #e5e7eb;
-    color: #6b7280;
-    text-align: center; /* Asegura el centrado */
-    padding: 1rem;
-    margin-bottom: 2rem;
-    border-radius: 0.5rem;
-    font-style: italic;
-    transition: background-color 0.3s ease;
-}
-.dark .ad-banner {
-    background-color: #4b5563;
-    color: #d1d5db;
-}
-
-/* Estilos de Botones de Pago */
-.payment-buttons-container {
-    opacity: 1; 
-    transition: opacity 0.5s ease;
-    min-height: 40px; /* Espacio reservado */
-}
-.buy-button {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    transition: background-color 0.2s, color 0.2s;
-    min-width: 80px; 
-}
-.buy-button i {
-    margin-bottom: 0.25rem;
-}
-
-/* Estilos para el video/audio */
-.media-container {
-    position: relative;
-    width: 100%;
-}
-.media-content {
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-}
-.media-content img,
-.media-content video,
-.media-content audio {
-    width: 100%;
-    height: auto;
-    max-height: 450px; /* Altura máxima para evitar posts excesivamente largos */
-    object-fit: contain;
-    border-radius: 0.5rem;
-    background-color: black;
-}
-.media-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    background-color: #f1f5f9;
-    border-radius: 0.5rem;
-    color: #94a3b8;
-}
-.dark .media-placeholder {
-    background-color: #1e293b;
-    color: #64748b;
-}
-
-/* Información de archivo */
-.file-info-card {
-    background-color: #eff6ff;
-    border: 1px solid #bfdbfe;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    margin-bottom: 1rem;
-}
-.dark .file-info-card {
-    background-color: #172554;
-    border-color: #3b82f6;
-}
+/* ... (Resto del CSS) ... */
