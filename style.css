@@ -13,7 +13,7 @@ body {
     background-color: #1a1a2e;
 }
 .container {
-    max-width: 600px; /* ESTO CONTROLA EL ANCHO DE "RED SOCIAL" */
+    max-width: 600px; /* THIS IS THE KEY RULE FOR 'SOCIAL MEDIA' WIDTH */
     margin: auto;
     padding: 1.5rem;
 }
@@ -51,7 +51,7 @@ body {
     border-radius: 0.5rem;
     font-style: italic;
     transition: background-color 0.3s ease;
-    width: 100%; /* Asegura que ocupe todo el ancho del container */
+    width: 100%; /* Ensures it takes the full width of the .container */
 }
 .dark .ad-banner {
     background-color: #4b5563;
@@ -77,7 +77,7 @@ body {
     width: 100%;
     height: auto;
     max-height: 450px; 
-    object-fit: contain; /* Asegura que la imagen completa se vea */
+    object-fit: contain; /* Ensures the full image is visible */
     border-radius: 0.5rem;
     background-color: black; 
 }
