@@ -1,13 +1,142 @@
-/* ... (El CSS del contenedor principal y los estilos de tarjeta se mantienen igual) ... */
+/*
+ * General Styles & Dark Mode Base
+ */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.dark {
+    color: #e5e7eb;
+}
+.dark body {
+    background-color: #1a1a2e;
+}
 .container {
-    max-width: 600px; /* Ancho ajustado */
+    max-width: 600px; /* Ancho ajustado para feed social */
     margin: auto;
     padding: 1.5rem;
 }
+
+/*
+ * Card & Post Styles
+ */
 .card {
     background-color: white;
     border-radius: 1rem;
-    padding: 1.5rem; /* Relleno uniforme en el interior de la tarjeta */
-    /* ... */
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid #e5e7eb;
 }
-/* ... (Resto del CSS) ... */
+.dark .card {
+    background-color: #2c2c44;
+    border-color: #3b3c5a;
+}
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/*
+ * Ad Banner Styles
+ */
+.ad-banner {
+    background-color: #e5e7eb;
+    color: #6b7280;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    font-style: italic;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Asegura que ocupe todo el ancho del container */
+}
+.dark .ad-banner {
+    background-color: #4b5563;
+    color: #d1d5db;
+}
+
+/*
+ * Media Container Styles
+ */
+.media-container {
+    position: relative;
+    width: 100%;
+    /* Asegura que el contenedor de medios respete los límites de la tarjeta */
+}
+.media-content {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    overflow: hidden; /* Importante para el radio de las esquinas */
+}
+.media-content img,
+.media-content video,
+.media-content audio {
+    width: 100%;
+    height: auto;
+    max-height: 450px; 
+    object-fit: contain; /* Asegura que la imagen completa se vea */
+    border-radius: 0.5rem;
+    background-color: black; /* Fondo oscuro para imágenes/videos */
+}
+.media-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    background-color: #f1f5f9;
+    border-radius: 0.5rem;
+    color: #94a3b8;
+}
+.dark .media-placeholder {
+    background-color: #1e293b;
+    color: #64748b;
+}
+
+/*
+ * File Info Card
+ */
+.file-info-card {
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+}
+.dark .file-info-card {
+    background-color: #172554;
+    border-color: #3b82f6;
+}
+
+/*
+ * Payment Buttons Styles
+ */
+.payment-buttons-container {
+    opacity: 1; 
+    transition: opacity 0.5s ease;
+    min-height: 40px; 
+}
+.buy-button {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: background-color 0.2s, color 0.2s;
+    min-width: 80px; 
+}
+.buy-button i {
+    margin-bottom: 0.25rem;
+}
+
+/*
+ * Comment Section Styles
+ */
+/* No se requiere CSS adicional si Tailwind está bien configurado */
