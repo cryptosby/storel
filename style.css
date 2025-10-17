@@ -13,8 +13,8 @@ body {
     background-color: #1a1a2e;
 }
 .container {
-    max-width: 600px; /* THIS IS THE KEY RULE FOR 'SOCIAL MEDIA' WIDTH */
-    margin: auto;
+    max-width: 600px !important; /* SOLUCIÓN DEFINITIVA: Fuerzamos el ancho máximo a 600px */
+    margin: auto !important;     /* Aseguramos el centrado */
     padding: 1.5rem;
 }
 
@@ -51,7 +51,7 @@ body {
     border-radius: 0.5rem;
     font-style: italic;
     transition: background-color 0.3s ease;
-    width: 100%; /* Ensures it takes the full width of the .container */
+    width: 100%;
 }
 .dark .ad-banner {
     background-color: #4b5563;
@@ -77,7 +77,7 @@ body {
     width: 100%;
     height: auto;
     max-height: 450px; 
-    object-fit: contain; /* Ensures the full image is visible */
+    object-fit: contain;
     border-radius: 0.5rem;
     background-color: black; 
 }
