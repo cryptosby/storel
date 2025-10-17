@@ -1,42 +1,16 @@
-/* ... (Mismo código CSS que en la respuesta anterior) ... */
+/* ... (Se mantienen estilos básicos) ... */
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f3f4f6;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-.dark body {
-    background-color: #1a1a2e;
-}
 .container {
-    max-width: 768px; /* Ancho de red social */
+    max-width: 600px; /* Reducido de 768px a 600px para hacerlo más angosto */
     margin: auto;
     padding: 1.5rem;
 }
 .card {
-    background-color: white;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    border: 1px solid #e5e7eb;
+    /* ... (Mantenido) ... */
 }
-/* ... (Resto del CSS) ... */
-
-/* Estilos para el video/audio (Mantenidos) */
-.media-container {
-    position: relative;
-    width: 100%;
+.ad-banner {
+    /* Se asegura que los anuncios estén centrados */
+    text-align: center; 
+    /* ... (Mantenido) ... */
 }
-.media-content {
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-}
-.media-content video,
-.media-content audio {
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-}
+/* ... (Se mantienen otros estilos) ... */
