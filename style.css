@@ -12,10 +12,13 @@ body {
 .dark body {
     background-color: #1a1a2e;
 }
+/* ... (El CSS del contenedor principal y los estilos de tarjeta se mantienen igual) ... */
 .container {
-    max-width: 600px; /* Ancho ajustado para feed social */
+    max-width: 600px; /* THIS IS THE KEY RULE FOR 'SOCIAL MEDIA' WIDTH */
     margin: auto;
     padding: 1.5rem;
+}
+/* ... (Resto del CSS) ... */
 }
 
 /*
