@@ -12,13 +12,10 @@ body {
 .dark body {
     background-color: #1a1a2e;
 }
-/* ... (El CSS del contenedor principal y los estilos de tarjeta se mantienen igual) ... */
 .container {
-    max-width: 600px; /* THIS IS THE KEY RULE FOR 'SOCIAL MEDIA' WIDTH */
+    max-width: 600px; /* ESTO CONTROLA EL ANCHO DE "RED SOCIAL" */
     margin: auto;
     padding: 1.5rem;
-}
-/* ... (Resto del CSS) ... */
 }
 
 /*
@@ -67,13 +64,12 @@ body {
 .media-container {
     position: relative;
     width: 100%;
-    /* Asegura que el contenedor de medios respete los límites de la tarjeta */
 }
 .media-content {
     width: 100%;
     height: auto;
     border-radius: 0.5rem;
-    overflow: hidden; /* Importante para el radio de las esquinas */
+    overflow: hidden; 
 }
 .media-content img,
 .media-content video,
@@ -83,7 +79,7 @@ body {
     max-height: 450px; 
     object-fit: contain; /* Asegura que la imagen completa se vea */
     border-radius: 0.5rem;
-    background-color: black; /* Fondo oscuro para imágenes/videos */
+    background-color: black; 
 }
 .media-placeholder {
     display: flex;
@@ -138,8 +134,3 @@ body {
 .buy-button i {
     margin-bottom: 0.25rem;
 }
-
-/*
- * Comment Section Styles
- */
-/* No se requiere CSS adicional si Tailwind está bien configurado */
