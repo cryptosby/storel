@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Storel - Social Digital Marketplace</title>
+    <meta name="description" content="Descubre una experiencia única de mercado digital. Explora y comparte contenido creativo como fotos, videos y e-books en una plataforma social única.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     
@@ -33,13 +34,14 @@
     <main class="container py-8">
         <div id="product-feed" class="space-y-10">
             </div>
+        
         <div id="no-results" class="card text-center p-8 hidden">
             <h3 class="text-xl font-semibold">No se encontraron productos</h3>
             <p class="text-gray-500 mt-2">Intenta con otras palabras clave o #tags.</p>
         </div>
     </main>
 
-    <footer>
+    <footer class="bg-white dark:bg-gray-800 mt-10 shadow-sm">
         <div class="container py-8 text-center text-gray-600 dark:text-gray-400">
             <div class="ad-banner text-xs sm:text-sm mb-6">Publicidad: Banner pre-footer (Ad 6)</div>
             <div class="flex flex-wrap justify-center space-x-4 sm:space-x-8 mb-4 text-sm font-medium">
@@ -53,6 +55,13 @@
         </div>
     </footer>
     
+    <div id="message-modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl text-center">
+            <p id="message-modal-text" class="text-lg font-semibold mb-4"></p>
+            <button onclick="document.getElementById('message-modal-overlay').classList.add('hidden')" class="bg-blue-600 text-white px-4 py-2 rounded-md">Cerrar</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
