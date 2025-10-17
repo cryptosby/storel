@@ -38,7 +38,7 @@ const productFeed = document.getElementById('product-feed');
 const noResultsMessage = document.getElementById('no-results');
 
 function savePostsToStorage() {
-    localStorage.setItem('infinityScrollPosts', JSON.stringify(posts));
+    localStorage.setItem('storelPosts', JSON.stringify(posts));
 }
 
 // =================================================================
