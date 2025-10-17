@@ -1,5 +1,5 @@
 // =================================================================
-// CONFIGURACIÓN Y DATA ESTATICA (SOLO UN POST)
+// CONFIGURACIÓN Y DATA ESTATICA
 // =================================================================
 
 const paymentButtonsConfig = [
@@ -11,7 +11,7 @@ const paymentButtonsConfig = [
     { id: 'crypto', show: false, delay: 30000, icon: 'fas fa-bitcoin', label: 'Crypto', color: 'hover:bg-yellow-500' }
 ];
 
-// Se cambia la clave de localStorage a 'storelPosts'
+// Se usa la nueva clave 'storelPosts'
 let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
     {
         id: 1,
@@ -19,9 +19,9 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         userImage: 'https://placehold.co/40x40/94a3b8/e2e8f0?text=U',
         title: 'Creative Photography "Inner Cosmos"',
         description: 'Un viaje visual a través de la galaxia. Perfecto para fondos de pantalla o impresiones de alta calidad. Archivo PNG.',
-        mediaUrl: 'https://placehold.co/800x600/1e293b/d4d4d8?text=Inner+Cosmos', // URL de IMAGEN/VIDEO
+        mediaUrl: 'https://placehold.co/800x600/1e293b/d4d4d8?text=Inner+Cosmos', 
         tags: ['foto', 'cosmos', 'galaxia', 'png', 'wallpaper', 'arte'], 
-        fileUrl: 'https://enlace.seguro.de/tuproducto', // ENLACE DE PAGO/DESCARGA FINAL
+        fileUrl: 'https://enlace.seguro.de/tuproducto', 
         fileType: 'image',
         fileSize: '2.4 MB',
         price: '20',
@@ -38,31 +38,33 @@ const productFeed = document.getElementById('product-feed');
 const noResultsMessage = document.getElementById('no-results');
 
 function savePostsToStorage() {
-    // Se guarda con la nueva clave 'storelPosts'
     localStorage.setItem('storelPosts', JSON.stringify(posts)); 
 }
 
 // =================================================================
-// LÓGICA DE RENDERIZADO (CORREGIDA)
+// LÓGICA DE RENDERIZADO (CORREGIDA Y COMPLETA)
 // =================================================================
 
 function renderAllPosts(filteredPosts = posts) {
-    if (!productFeed) return;
+    if (!productFeed) {
+        console.error("El elemento 'product-feed' no se encontró en el DOM.");
+        return;
+    }
     
     productFeed.innerHTML = '';
     
     if (filteredPosts.length === 0) {
-        noResultsMessage.classList.remove('hidden');
+        if (noResultsMessage) noResultsMessage.classList.remove('hidden');
         return;
     } else {
-        noResultsMessage.classList.add('hidden');
+        if (noResultsMessage) noResultsMessage.classList.add('hidden');
     }
 
     filteredPosts.forEach(post => {
         const card = document.createElement('div');
         card.className = 'card';
         
-        // --- Generar botones de pago (Se mantiene) ---
+        // --- Generar HTML de Botones de Pago ---
         const paymentButtonsHTML = paymentButtonsConfig.filter(btn => btn.show).map(btn => `
             <button onclick="window.open('${post.fileUrl}', '_blank')" 
                     class="buy-button hidden bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white ${btn.color} hover:text-white"
@@ -73,7 +75,7 @@ function renderAllPosts(filteredPosts = posts) {
             </button>
         `).join('');
 
-        // --- Generar Comentarios (Se mantiene) ---
+        // --- Generar HTML de Comentarios ---
         const commentsHtml = post.comments && post.comments.length > 0 ?
             post.comments.map(c => `
                 <div id="comment-${c.id}" class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-2">
@@ -97,7 +99,7 @@ function renderAllPosts(filteredPosts = posts) {
             `).join('') : '<p class="text-sm text-gray-500 dark:text-gray-400">Sé el primero en comentar.</p>';
 
 
-        // --- HTML COMPLETO DEL POST (CORRECCIÓN CLAVE) ---
+        // --- HTML COMPLETO DEL POST ---
         card.innerHTML = `
             <div class="ad-banner text-xs sm:text-sm mb-4">Publicidad: Banner dentro de post (Ad 2)</div>
 
@@ -178,12 +180,202 @@ function renderAllPosts(filteredPosts = posts) {
     });
 }
 
-// ... (El resto de funciones auxiliares y el filtro se mantienen igual)
-
 // =================================================================
-// CORRECCIÓN MODO NOCTURNO Y CARGA INICIAL (Se mantiene)
+// FUNCIONES AUXILIARES (Modo Nocturno, Likes, Comentarios)
 // =================================================================
 
+function filterPosts(query) {
+    let term = query.toLowerCase().trim();
+    if (term.startsWith('#')) {
+        term = term.substring(1); 
+    }
+    
+    if (term.length < 3 && term.length > 0 && !query.startsWith('#')) {
+        renderAllPosts(posts);
+        return;
+    }
+    
+    if (term === '') {
+        renderAllPosts(posts);
+        return;
+    }
+
+    const filtered = posts.filter(post => {
+        const titleMatch = post.title.toLowerCase().includes(term);
+        const descriptionMatch = post.description.toLowerCase().includes(term);
+        const tagsMatch = post.tags && post.tags.some(tag => tag.toLowerCase().includes(term));
+        return titleMatch || descriptionMatch || tagsMatch;
+    });
+
+    renderAllPosts(filtered);
+}
+
+// Gets HTML for the file preview
+function getPostMedia(url, fileType, altText) {
+    if (!url) {
+        return `<div class="media-placeholder w-full h-full"><i class="fas fa-cloud-upload-alt text-4xl mb-4"></i><span>No hay archivo de previsualización</span></div>`;
+    }
+
+    // Lógica para renderizar imagen/video/etc.
+    if (fileType) {
+        switch(fileType) {
+            case 'image':
+                return `<img src="${url}" onerror="this.onerror=null;this.src='https://placehold.co/600x800/e2e8f0/64748b?text=Image+not+available';" alt="${altText}" class="w-full h-auto max-h-96 object-contain rounded-lg">`;
+            case 'video':
+                return `<video controls class="w-full h-auto max-h-96 rounded-lg" style="background: #000;"><source src="${url}" type="video/mp4">Tu navegador no soporta el video.</video>`;
+            case 'audio':
+                return `<div class="w-full p-6 bg-gray-100 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center"><i class="fas fa-music text-4xl mb-4 text-blue-500"></i><audio controls class="w-full mt-4"><source src="${url}" type="audio/mpeg">Tu navegador no soporta el audio.</audio></div>`;
+            default:
+                return `<div class="media-placeholder w-full h-full"><i class="fas fa-file text-4xl mb-4"></i><span>Archivo Digital</span></div>`;
+        }
+    }
+}
+
+function renderReplies(replies) {
+    if (!replies || replies.length === 0) return '';
+    return replies.map(r => `
+        <div class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg" data-reply-id="${r.id}">
+             <div class="flex items-center justify-between space-x-3 mb-1">
+                <div class="flex items-center space-x-3">
+                    <img class="w-6 h-6 rounded-full object-cover" src="${r.userImage}" alt="Reply Profile">
+                    <span class="font-bold text-xs">${r.user}</span>
+                    <p class="text-xs text-gray-500">${new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                </div>
+            </div>
+            <p id="reply-text-${r.id}" class="text-gray-700 dark:text-gray-300 text-xs">${r.text}</p>
+        </div>
+    `).join('');
+}
+
+function initializePaymentButtons(postId) {
+    const container = document.getElementById(`payment-buttons-container-${postId}`);
+    if (container) {
+        // Hacemos el contenedor visible de inmediato
+        container.classList.add('visible');
+    }
+
+    // Mostramos los botones con retraso
+    paymentButtonsConfig.forEach(buttonConfig => {
+        if (buttonConfig.show) {
+            setTimeout(() => {
+                const button = document.getElementById(`${buttonConfig.id}-button-${postId}`);
+                if (button) {
+                    button.classList.remove('hidden'); 
+                }
+            }, buttonConfig.delay);
+        }
+    });
+}
+
+function toggleReplyBox(commentId) {
+    const replyBox = document.getElementById(`reply-box-${commentId}`);
+    if (replyBox) {
+        replyBox.classList.toggle('hidden');
+    }
+}
+
+function toggleLike(id, button) {
+    const post = posts.find(p => p.id === id);
+    if (post) {
+        const isLiked = localStorage.getItem(`liked-${id}`) === 'true'; 
+        if (isLiked) {
+            post.likes--;
+            localStorage.setItem(`liked-${id}`, 'false');
+        } else {
+            post.likes++;
+            localStorage.setItem(`liked-${id}`, 'true');
+        }
+        savePostsToStorage();
+        renderAllPosts(); 
+    }
+}
+
+function sharePost(id) {
+    const currentUrl = window.location.href;
+    const tempInput = document.createElement('textarea');
+    tempInput.value = currentUrl;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999);
+
+    try {
+        document.execCommand('copy');
+        showMessage('URL de la publicación copiada al portapapeles!');
+    } catch (err) {
+        console.error('Error al copiar al portapapeles:', err);
+        showMessage('Error al copiar la URL. Por favor, cópiala manualmente.');
+    } finally {
+        document.body.removeChild(tempInput);
+    }
+}
+
+function addComment(id) {
+    const commentInput = document.getElementById(`comment-input-${id}`);
+    const commentText = commentInput.value.trim();
+    if (commentText) {
+        const post = posts.find(p => p.id === id);
+        const newCommentId = Date.now();
+        const newComment = { 
+            id: newCommentId, 
+            user: 'Visitante', 
+            userImage: 'https://placehold.co/30x30/bfdbfe/1d4ed8?text=V', 
+            text: commentText, 
+            date: new Date().toISOString().split('T')[0], 
+            replies: [] 
+        };
+        post.comments.push(newComment);
+        savePostsToStorage();
+        renderAllPosts(); 
+        commentInput.value = '';
+    }
+}
+
+function addReply(postId, commentId) {
+    const replyInput = document.getElementById(`reply-input-${commentId}`);
+    const replyText = replyInput.value.trim();
+    if (!replyText) return;
+
+    const post = posts.find(p => p.id === postId);
+    const parentComment = post.comments.find(c => c.id === commentId);
+
+    if (parentComment) {
+        const newReplyId = Date.now();
+        const newReply = { 
+            id: newReplyId, 
+            user: 'Visitante', 
+            userImage: 'https://placehold.co/24x24/fecaca/991b1b?text=R', 
+            text: replyText, 
+            date: new Date().toISOString().split('T')[0] 
+        };
+        parentComment.replies.push(newReply);
+        savePostsToStorage();
+        renderAllPosts(); 
+        toggleReplyBox(commentId);
+    }
+}
+
+function getFileTypeText(fileType) {
+    const typeMap = {
+        'image': 'Imagen',
+        'video': 'Video',
+        'audio': 'Audio',
+        'pdf': 'Documento PDF',
+        'ebook': 'E-Book',
+        'archive': 'Archivo Comprimido'
+    };
+    return typeMap[fileType] || 'Archivo Digital';
+}
+
+function showMessage(message) {
+    const modal = document.getElementById('message-modal-overlay');
+    const text = document.getElementById('message-modal-text');
+    if (modal && text) {
+        text.innerText = message;
+        modal.classList.remove('hidden');
+    }
+}
+
+// Modo Nocturno Corregido
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 
@@ -203,6 +395,7 @@ if (themeToggle && themeIcon) {
     });
 }
 
+// Carga Inicial
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializa el modo oscuro al cargar
     if (localStorage.getItem('theme') === 'dark') {
