@@ -2,13 +2,14 @@
 // CONFIGURACIÓN Y DATA ESTATICA (English Translation)
 // =================================================================
 
+// CONFIGURACIÓN GLOBAL DE BOTONES DE PAGO (Solo define la estructura y el delay global)
 const paymentButtonsConfig = [
-    { id: 'whatsapp', show: true, delay: 5000, icon: 'fab fa-whatsapp', label: 'WhatsApp', color: 'hover:bg-green-500' },
-    { id: 'telegram', show: true, delay: 10000, icon: 'fab fa-telegram-plane', label: 'Telegram', color: 'hover:bg-blue-500' },
-    { id: 'paypal', show: true, delay: 15000, icon: 'fab fa-paypal', label: 'Paypal', color: 'hover:bg-blue-600' },
-    { id: 'bank', show: false, delay: 20000, icon: 'fas fa-university', label: 'Bank', color: 'hover:bg-gray-600' },
-    { id: 'donate', show: false, delay: 25000, icon: 'fas fa-gift', label: 'Thanks', color: 'hover:bg-orange-500' },
-    { id: 'crypto', show: true, delay: 30000, icon: 'fas fa-bitcoin', label: 'Crypto', color: 'hover:bg-yellow-500' }
+    { id: 'whatsapp', icon: 'fab fa-whatsapp', label: 'WhatsApp', color: 'hover:bg-green-500', delay: 5000 },
+    { id: 'telegram', icon: 'fab fa-telegram-plane', label: 'Telegram', color: 'hover:bg-blue-500', delay: 10000 },
+    { id: 'paypal', icon: 'fab fa-paypal', label: 'Paypal', color: 'hover:bg-blue-600', delay: 15000 },
+    { id: 'bank', icon: 'fas fa-university', label: 'Bank', color: 'hover:bg-gray-600', delay: 20000 },
+    { id: 'donate', icon: 'fas fa-gift', label: 'Thanks', color: 'hover:bg-orange-500', delay: 25000 },
+    { id: 'crypto', icon: 'fas fa-bitcoin', label: 'Crypto', color: 'hover:bg-yellow-500', delay: 30000 }
 ];
 
 let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
@@ -27,10 +28,18 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         isFree: false,
         showFileInfo: true,
         likes: 124,
+        // (A) PROPIEDAD DE GESTIÓN INDIVIDUAL AÑADIDA
+        paymentOptions: {
+            whatsapp: true,
+            telegram: true, 
+            paypal: true,
+            bank: false,
+            donate: true,
+            crypto: false
+        },
         comments: [
-            { id: 100, user: 'Jav Lopez.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=JL', text: 'Thank you for responding promptly and clarifying my doubts..', date: '2024-16-08', replies: [] },
-            { id: 101, user: 'Ana G.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=A', text: 'Amazing! I love the depth of the colors.', date: '2024-17-07', replies: [] },
-            { id: 102, user: 'Carlos M.', userImage: 'https://placehold.co/30x30/bdbdff/0000ff?text=C', text: 'Excellent price for this quality. Highly recommended.', date: '2024-29-06', replies: [] }
+            { id: 101, user: 'Ana G.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=A', text: 'Amazing! I love the depth of the colors.', date: '2024-09-05', replies: [] },
+            { id: 102, user: 'Carlos M.', userImage: 'https://placehold.co/30x30/bdbdff/0000ff?text=C', text: 'Excellent price for this quality. Highly recommended.', date: '2024-09-06', replies: [] }
         ]
     }
 ];
@@ -50,7 +59,7 @@ function savePostsToStorage() {
 }
 
 // =================================================================
-// LÓGICA DE RENDERIZADO PRINCIPAL (English Translation & Banner Reubicado)
+// LÓGICA DE RENDERIZADO PRINCIPAL
 // =================================================================
 
 function renderReplies(replies) {
@@ -98,15 +107,15 @@ function initializePaymentButtons(postId) {
         container.classList.add('visible');
     }
 
+    // Usamos el paymentButtonsConfig global para obtener los delays
     paymentButtonsConfig.forEach(buttonConfig => {
-        if (buttonConfig.show) {
-            setTimeout(() => {
-                const button = document.getElementById(`${buttonConfig.id}-button-${postId}`);
-                if (button) {
-                    button.classList.remove('hidden'); 
-                }
-            }, buttonConfig.delay);
-        }
+        setTimeout(() => {
+            const button = document.getElementById(`${buttonConfig.id}-button-${postId}`);
+            if (button) {
+                // El botón solo se muestra si NO tiene la clase 'hidden' inicial
+                button.classList.remove('hidden'); 
+            }
+        }, buttonConfig.delay);
     });
 }
 
@@ -126,16 +135,19 @@ function renderAllPosts(filteredPosts = posts) {
         const card = document.createElement('div');
         card.className = 'card';
         
-        // --- Generate ROTATING Payment Buttons HTML (Labels translated) ---
-        const paymentButtonsHTML = paymentButtonsConfig.filter(btn => btn.show).map(btn => `
-            <button onclick="window.open('${post.fileUrl}', '_blank')" 
-                    class="buy-button hidden bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white ${btn.color} hover:text-white"
-                    id="${btn.id}-button-${post.id}">
-                <i class="${btn.icon} text-lg"></i>
-                <span>${btn.label}</span>
-                <span class="text-xs">${btn.label === 'Thanks' ? 'Donation' : 'View Option'}</span>
-            </button>
-        `).join('');
+        // (A) GENERACIÓN DE BOTONES DE PAGO INDIVIDUALES
+        const paymentButtonsHTML = paymentButtonsConfig
+            // FILTRA solo los botones habilitados en el objeto paymentOptions del post
+            .filter(btn => post.paymentOptions && post.paymentOptions[btn.id] === true)
+            .map(btn => `
+                <button onclick="window.open('${post.fileUrl}', '_blank')" 
+                        class="buy-button hidden bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white ${btn.color} hover:text-white"
+                        id="${btn.id}-button-${post.id}">
+                    <i class="${btn.icon} text-lg"></i>
+                    <span>${btn.label}</span>
+                    <span class="text-xs">${btn.label === 'Thanks' ? 'Donation' : 'View Option'}</span>
+                </button>
+            `).join('');
 
         // --- Generate Comments HTML (Banner Reubicado) ---
         let commentsHtml = '';
@@ -208,8 +220,8 @@ function renderAllPosts(filteredPosts = posts) {
             <div id="file-info-card-${post.id}" class="file-info-card ${(!post.fileSize || !post.showFileInfo) ? 'hidden' : ''}">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h4 class="font-semibold text-blue-100 dark:text-blue-50">File Information</h4>
-                        <p class="text-xs text-blue-100 dark:text-blue-50">Type: ${getFileTypeText(post.fileType)} | Size: ${post.fileSize || 'Unknown'}</p>
+                        <h4 class="font-semibold text-blue-700 dark:text-blue-300">File Information</h4>
+                        <p class="text-xs text-blue-600 dark:text-blue-400">Type: ${getFileTypeText(post.fileType)} | Size: ${post.fileSize || 'Unknown'}</p>
                     </div>
                     ${(post.isFree && post.fileUrl) ? `<a href="${post.fileUrl}" download class="bg-green-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-600 transition-colors">Download FREE</a>` : ''}
                 </div>
@@ -223,10 +235,7 @@ function renderAllPosts(filteredPosts = posts) {
                         <i class="fas fa-heart text-2xl"></i>
                     </button>
                     <span class="likes-count text-lg font-medium">${post.likes}</span>
-                    
-                        <i class="fas fa-share-alt text-2xl"></i>
-                    </button>
-                </div>
+                    </div>
             </div>
             
             <div class="ad-banner text-xs sm:text-sm mt-6">Advertisement: Above Buttons (Ad 4)</div>
@@ -259,7 +268,7 @@ function renderAllPosts(filteredPosts = posts) {
 }
 
 // =================================================================
-// AUXILIARY AND INTERACTION FUNCTIONS (Simplified for brevity, maintained from previous version)
+// AUXILIARY AND INTERACTION FUNCTIONS (Mantienen su funcionalidad)
 // =================================================================
 
 function filterPosts(query) {
@@ -310,7 +319,7 @@ function toggleLike(id, button) {
     }
 }
 
-// (Otras funciones de interacción como sharePost, addComment, addReply, showMessage se mantendrían here)
+// (Otras funciones de interacción como addComment, addReply, showMessage se mantendrían aquí si estuvieran definidas)
 
 
 // =================================================================
