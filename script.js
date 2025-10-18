@@ -37,8 +37,9 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
             crypto: false
         },
         comments: [
-            { id: 101, user: 'Ana G.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=A', text: 'Amazing! I love the depth of the colors.', date: '2024-09-05', replies: [] },
-            { id: 102, user: 'Carlos M.', userImage: 'https://placehold.co/30x30/bdbdff/0000ff?text=C', text: 'Excellent price for this quality. Highly recommended.', date: '2024-09-06', replies: [] }
+            // Es importante que la fecha esté en formato ISO string
+            { id: 101, user: 'Ana G.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=A', text: 'Amazing! I love the depth of the colors.', date: '2025-10-17T12:00:00Z', replies: [] }, // Comentario de hace ~1 día
+            { id: 102, user: 'Carlos M.', userImage: 'https://placehold.co/30x30/bdbdff/0000ff?text=C', text: 'Excellent price for this quality. Highly recommended.', date: '2025-10-18T10:00:00Z', replies: [] } // Comentario de hace ~7 horas
         ]
     }
 ];
@@ -58,23 +59,59 @@ function savePostsToStorage() {
 }
 
 // =================================================================
+// NUEVA FUNCIÓN DE TIEMPO RELATIVO ABREVIADO
+// =================================================================
+
+function getRelativeTime(dateString) {
+    const now = new Date();
+    const past = new Date(dateString);
+    const seconds = Math.floor((now - past) / 1000);
+
+    let interval = Math.floor(seconds / 31536000); // años
+    if (interval >= 1) {
+        return interval + "y";
+    }
+    interval = Math.floor(seconds / 2592000); // meses
+    if (interval >= 1) {
+        return interval + "mo";
+    }
+    interval = Math.floor(seconds / 86400); // días
+    if (interval >= 1) {
+        return interval + "d";
+    }
+    interval = Math.floor(seconds / 3600); // horas
+    if (interval >= 1) {
+        return interval + "h";
+    }
+    interval = Math.floor(seconds / 60); // minutos
+    if (interval >= 1) {
+        return interval + "m";
+    }
+    return Math.floor(seconds) + "s"; // segundos
+}
+
+
+// =================================================================
 // LÓGICA DE RENDERIZADO PRINCIPAL
 // =================================================================
 
 function renderReplies(replies) {
     if (!replies || replies.length === 0) return '';
-    return replies.map(r => `
+    return replies.map(r => {
+        const exactDate = new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        const relativeTime = getRelativeTime(r.date);
+        return `
         <div class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg" data-reply-id="${r.id}">
              <div class="flex items-center justify-between space-x-3 mb-1">
                 <div class="flex items-center space-x-3">
                     <img class="w-6 h-6 rounded-full object-cover" src="${r.userImage}" alt="Reply Profile">
                     <span class="font-bold text-xs">${r.user}</span>
-                    <p class="text-xs text-gray-500">${new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                    <p class="text-xs text-gray-500">${exactDate} &bull; ${relativeTime}</p>
                 </div>
             </div>
             <p id="reply-text-${r.id}" class="text-gray-700 dark:text-gray-300 text-xs">${r.text}</p>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 function getPostMedia(url, fileType, altText) {
@@ -152,13 +189,17 @@ function renderAllPosts(filteredPosts = posts) {
         let commentsHtml = '';
         if (post.comments && post.comments.length > 0) {
             
-            const commentHTMLArray = post.comments.map(c => `
+            const commentHTMLArray = post.comments.map(c => {
+                const exactDate = new Date(c.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                const relativeTime = getRelativeTime(c.date);
+                
+                return `
                 <div id="comment-${c.id}" class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-2">
                     <div class="flex items-center justify-between space-x-3 mb-1">
                         <div class="flex items-center space-x-3">
                             <img class="w-8 h-8 rounded-full object-cover" src="${c.userImage}" alt="Comment Profile">
                             <span class="font-bold text-sm">${c.user}</span>
-                            <p class="text-xs text-gray-500">${new Date(c.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                            <p class="text-xs text-gray-500">${exactDate} &bull; ${relativeTime}</p>
                         </div>
                     </div>
                     <p id="comment-text-${c.id}" class="text-gray-700 dark:text-gray-300 text-sm">${c.text}</p>
@@ -171,7 +212,7 @@ function renderAllPosts(filteredPosts = posts) {
                         ${renderReplies(c.replies)}
                     </div>
                 </div>
-            `);
+            `});
 
             // Inject the banner between the first and second comment if at least two exist
             if (commentHTMLArray.length >= 2) {
@@ -330,7 +371,7 @@ function toggleLike(id, button) {
 }
 
 // =================================================================
-// FUNCIONES DE COMENTARIOS AÑADIDAS (SOLUCIÓN AL ERROR 'is not defined')
+// FUNCIONES DE COMENTARIOS 
 // =================================================================
 
 function addComment(postId) {
@@ -348,7 +389,7 @@ function addComment(postId) {
         user: 'You', // El usuario es 'You' (tú) ya que es local
         userImage: 'https://placehold.co/30x30/059669/d1fae5?text=Y', // Ícono de 'You'
         text: commentText,
-        date: new Date().toISOString(),
+        date: new Date().toISOString(), // Guarda la fecha en formato ISO
         replies: []
     };
 
@@ -374,7 +415,7 @@ function addReply(postId, commentId) {
         user: 'You', // El usuario es 'You' (tú) ya que es local
         userImage: 'https://placehold.co/30x30/059669/d1fae5?text=Y', // Ícono de 'You'
         text: replyText,
-        date: new Date().toISOString()
+        date: new Date().toISOString() // Guarda la fecha en formato ISO
     };
 
     if (!comment.replies) {
