@@ -28,9 +28,9 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         showFileInfo: true,
         likes: 124,
         comments: [
-            { id: 100, user: 'Jav Lopez.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=JL', text: 'Thank you for responding promptly and clarifying my doubts..', date: '2024-08-15', replies: [] },
-            { id: 101, user: 'Ana G.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=A', text: 'Amazing! I love the depth of the colors.', date: '2024-09-05', replies: [] },
-            { id: 102, user: 'Carlos M.', userImage: 'https://placehold.co/30x30/bdbdff/0000ff?text=C', text: 'Excellent price for this quality. Highly recommended.', date: '2025-09-23', replies: [] }
+            { id: 100, user: 'Jav Lopez.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=JL', text: 'Thank you for responding promptly and clarifying my doubts..', date: '2024-16-08', replies: [] },
+            { id: 101, user: 'Ana G.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=A', text: 'Amazing! I love the depth of the colors.', date: '2024-17-07', replies: [] },
+            { id: 102, user: 'Carlos M.', userImage: 'https://placehold.co/30x30/bdbdff/0000ff?text=C', text: 'Excellent price for this quality. Highly recommended.', date: '2024-29-06', replies: [] }
         ]
     }
 ];
