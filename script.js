@@ -208,7 +208,7 @@ function renderAllPosts(filteredPosts = posts) {
                 <div class="flex justify-between items-center">
                     <div>
                         <h4 class="font-semibold text-blue-700 dark:text-blue-300">File Information</h4>
-                        <p class="text-sm text-blue-600 dark:text-blue-400">Type: ${getFileTypeText(post.fileType)} | Size: ${post.fileSize || 'Unknown'}</p>
+                        <p class="text-xs text-blue-600 dark:text-blue-400">Type: ${getFileTypeText(post.fileType)} | Size: ${post.fileSize || 'Unknown'}</p>
                     </div>
                     ${(post.isFree && post.fileUrl) ? `<a href="${post.fileUrl}" download class="bg-green-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-600 transition-colors">Download FREE</a>` : ''}
                 </div>
