@@ -207,8 +207,8 @@ function renderAllPosts(filteredPosts = posts) {
             <div id="file-info-card-${post.id}" class="file-info-card ${(!post.fileSize || !post.showFileInfo) ? 'hidden' : ''}">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h4 class="font-semibold text-blue-200 dark:text-blue-70">File Information</h4>
-                        <p class="text-xs text-blue-200 dark:text-blue-90">Type: ${getFileTypeText(post.fileType)} | Size: ${post.fileSize || 'Unknown'}</p>
+                        <h4 class="font-semibold text-blue-100 dark:text-blue-50">File Information</h4>
+                        <p class="text-xs text-blue-100 dark:text-blue-50">Type: ${getFileTypeText(post.fileType)} | Size: ${post.fileSize || 'Unknown'}</p>
                     </div>
                     ${(post.isFree && post.fileUrl) ? `<a href="${post.fileUrl}" download class="bg-green-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-green-600 transition-colors">Download FREE</a>` : ''}
                 </div>
@@ -222,7 +222,7 @@ function renderAllPosts(filteredPosts = posts) {
                         <i class="fas fa-heart text-2xl"></i>
                     </button>
                     <span class="likes-count text-lg font-medium">${post.likes}</span>
-                    <button onclick="sharePost(${post.id})" class="text-gray-400 dark:text-gray-500 hover:text-blue-500 transition-colors">
+                    
                         <i class="fas fa-share-alt text-2xl"></i>
                     </button>
                 </div>
