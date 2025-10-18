@@ -7,8 +7,8 @@ const paymentButtonsConfig = [
     { id: 'telegram', show: true, delay: 10000, icon: 'fab fa-telegram-plane', label: 'Telegram', color: 'hover:bg-blue-500' },
     { id: 'paypal', show: true, delay: 15000, icon: 'fab fa-paypal', label: 'Paypal', color: 'hover:bg-blue-600' },
     { id: 'bank', show: false, delay: 20000, icon: 'fas fa-university', label: 'Bank', color: 'hover:bg-gray-600' },
-    { id: 'donate', show: true, delay: 25000, icon: 'fas fa-gift', label: 'Thanks', color: 'hover:bg-orange-500' },
-    { id: 'crypto', show: false, delay: 30000, icon: 'fas fa-bitcoin', label: 'Crypto', color: 'hover:bg-yellow-500' }
+    { id: 'donate', show: false, delay: 25000, icon: 'fas fa-gift', label: 'Thanks', color: 'hover:bg-orange-500' },
+    { id: 'crypto', show: true, delay: 30000, icon: 'fas fa-bitcoin', label: 'Crypto', color: 'hover:bg-yellow-500' }
 ];
 
 let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
