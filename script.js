@@ -28,7 +28,6 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         isFree: false,
         showFileInfo: true,
         likes: 124,
-        // (A) PROPIEDAD DE GESTIÓN INDIVIDUAL AÑADIDA
         paymentOptions: {
             whatsapp: true,
             telegram: true, 
@@ -135,7 +134,7 @@ function renderAllPosts(filteredPosts = posts) {
         const card = document.createElement('div');
         card.className = 'card';
         
-        // (A) GENERACIÓN DE BOTONES DE PAGO INDIVIDUALES
+        // GENERACIÓN DE BOTONES DE PAGO INDIVIDUALES
         const paymentButtonsHTML = paymentButtonsConfig
             // FILTRA solo los botones habilitados en el objeto paymentOptions del post
             .filter(btn => post.paymentOptions && post.paymentOptions[btn.id] === true)
@@ -268,8 +267,19 @@ function renderAllPosts(filteredPosts = posts) {
 }
 
 // =================================================================
-// AUXILIARY AND INTERACTION FUNCTIONS (Mantienen su funcionalidad)
+// AUXILIARY AND INTERACTION FUNCTIONS
 // =================================================================
+
+function showMessage(text) {
+    const modal = document.getElementById('message-modal-overlay');
+    const modalText = document.getElementById('message-modal-text');
+    if (modal && modalText) {
+        modalText.textContent = text;
+        modal.classList.remove('hidden');
+    } else {
+        alert(text);
+    }
+}
 
 function filterPosts(query) {
     let term = query.toLowerCase().trim();
@@ -319,7 +329,63 @@ function toggleLike(id, button) {
     }
 }
 
-// (Otras funciones de interacción como addComment, addReply, showMessage se mantendrían aquí si estuvieran definidas)
+// =================================================================
+// FUNCIONES DE COMENTARIOS AÑADIDAS (SOLUCIÓN AL ERROR 'is not defined')
+// =================================================================
+
+function addComment(postId) {
+    const post = posts.find(p => p.id === postId);
+    const inputElement = document.getElementById(`comment-input-${postId}`);
+    const commentText = inputElement ? inputElement.value.trim() : '';
+
+    if (!commentText || !post) {
+        if (inputElement) inputElement.value = '';
+        return;
+    }
+
+    const newComment = {
+        id: Date.now(), // ID único basado en la hora
+        user: 'You', // El usuario es 'You' (tú) ya que es local
+        userImage: 'https://placehold.co/30x30/059669/d1fae5?text=Y', // Ícono de 'You'
+        text: commentText,
+        date: new Date().toISOString(),
+        replies: []
+    };
+
+    post.comments.push(newComment);
+    savePostsToStorage();
+    renderAllPosts(); // Vuelve a dibujar todos los posts para actualizar el feed y el contador
+    showMessage('Comment added successfully!');
+}
+
+function addReply(postId, commentId) {
+    const post = posts.find(p => p.id === postId);
+    const comment = post ? post.comments.find(c => c.id === commentId) : null;
+    const inputElement = document.getElementById(`reply-input-${commentId}`);
+    const replyText = inputElement ? inputElement.value.trim() : '';
+
+    if (!replyText || !comment) {
+        if (inputElement) inputElement.value = '';
+        return;
+    }
+
+    const newReply = {
+        id: Date.now(), // ID único
+        user: 'You', // El usuario es 'You' (tú) ya que es local
+        userImage: 'https://placehold.co/30x30/059669/d1fae5?text=Y', // Ícono de 'You'
+        text: replyText,
+        date: new Date().toISOString()
+    };
+
+    if (!comment.replies) {
+        comment.replies = [];
+    }
+    
+    comment.replies.push(newReply);
+    savePostsToStorage();
+    renderAllPosts(); // Vuelve a dibujar todos los posts para actualizar el feed
+    showMessage('Reply added successfully!');
+}
 
 
 // =================================================================
