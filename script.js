@@ -21,7 +21,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         description: '¡Descubre cómo dominar rápidamente los vídeos cortos de YouTube para alcanzar el éxito digital!',
         mediaUrl: 'https://www.youtube.com/shorts/k4SIXRJfVjc', 
         tags: ['photo', 'producto digital', 'pdf', 'png', 'ebook', 'youtube', 'video'], 
-        fileUrl: 'https://enlace.seguro.de/tuproducto', 
+        fileUrl: 'https://go.screenpal.com/watch/cOhQeBntIiV', 
         fileType: 'PDF',
         fileSize: '2.2 MB',
         price: '29',
