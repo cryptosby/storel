@@ -22,7 +22,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         mediaUrl: 'https://go.screenpal.com/watch/cOhQeBntIiV', 
         tags: ['photo', 'producto digital', 'pdf', 'png', 'ebook', 'youtube', 'video'], 
         fileUrl: 'https://enlace.seguro.de/tuproducto', 
-        fileType: 'PDF',
+        fileType: 'Video',
         fileSize: '2.2 MB',
         price: '29',
         isFree: false,
