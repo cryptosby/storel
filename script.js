@@ -19,7 +19,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         userImage: 'https://i.postimg.cc/P5p883pm/Adm-digital-product-marketplace-social-networks-(modi).png',
         title: 'Youtube Shorts Guia "Cero Excusas"',
         description: '¡Descubre cómo dominar rápidamente los vídeos cortos de YouTube para alcanzar el éxito digital!',
-        mediaUrl: 'https://go.screenpal.com/watch/cOhQeBntIiV', 
+        mediaUrl: 'https://www.youtube.com/shorts/k4SIXRJfVjc', 
         tags: ['photo', 'producto digital', 'pdf', 'png', 'ebook', 'youtube', 'video'], 
         fileUrl: 'https://enlace.seguro.de/tuproducto', 
         fileType: 'PDF',
@@ -38,8 +38,8 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         },
         comments: [
             // Es importante que la fecha esté en formato ISO string
-            { id: 101, user: 'Ana G.', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=A', text: 'Amazing! I love the depth of the colors.', date: '2025-10-17T12:00:00Z', replies: [] }, // Comentario de hace ~1 día
-            { id: 102, user: 'Carlos M.', userImage: 'https://placehold.co/30x30/bdbdff/0000ff?text=C', text: 'Excellent price for this quality. Highly recommended.', date: '2025-10-18T10:00:00Z', replies: [] } // Comentario de hace ~7 horas
+            { id: 101, user: 'Ana Garcia', userImage: 'https://postimg.cc/DJ1vpJbf', text: 'Amazing! I love the depth of the colors.', date: '2025-10-17T12:00:00Z', replies: [] }, // Comentario de hace ~1 día
+            { id: 102, user: 'Arturo Mendez', userImage: 'https://postimg.cc/06pFLpZF', text: 'Excellent price for this quality. Highly recommended.', date: '2025-10-18T10:00:00Z', replies: [] } // Comentario de hace ~7 horas
         ]
     }
 ];
