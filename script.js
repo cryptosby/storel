@@ -1,14 +1,6 @@
 // =================================================================
 // CONFIGURACIÓN Y DATA ESTATICA (English Translation)
 // =================================================================
-// --- CONFIGURACIÓN DE SERVIDORES EXTERNOS (INDEPENDIENTE) ---
-const IMG_SERVER = "https://i.ibb.co/"; // Ejemplo: Tu servidor de imágenes
-const SERV_IMAGENES_A = "https://i.ibb.co/"; 
-const SERV_IMAGENES_B = "https://imgur.com/";
-const SERV_PDFS = "https://mega.nz/file/";
-const SERV_VIDEOS = "https://drive.google.com/uc?id=";
-const FILE_SERVER = "https://mega.nz/file/"; // Ejemplo: Tu servidor de descargas
-const PRO_USER_IMG = "https://placehold.co/100x100/3b82f6/ffffff?text=Admin"; // Tu foto de Admin (100x100 recomendado)
 
 // CONFIGURACIÓN GLOBAL DE BOTONES DE PAGO (Solo define la estructura y el delay global)
 const paymentButtonsConfig = [
