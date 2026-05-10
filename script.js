@@ -19,7 +19,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         userImage: 'https://i.postimg.cc/P5p883pm/Adm-digital-product-marketplace-social-networks-(modi).png',
         title: 'YouTube Shorts Guia "Cero Excusas"',
         description: 'Descubre cómo dominar rápidamente los vídeos cortos de YouTube para alcanzar el éxito digital.',
-        mediaUrl: 'https://go.screenpal.com/player/cOhQeBntIiV', 
+        mediaUrl: 'https://go.screenpal.com/player/cOhQeBntIiV?ff=1&title=0&controls=0&fs=0&share=1&download=1&embed=1&cl=1&width=100%&height=100%', 
         tags: ['photo', 'pdf', 'producto digital', 'png', 'youtube', 'video short', 'ebook'], 
         fileUrl: 'https://enlace.seguro.de/tuproducto', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
         fileType: 'video',
