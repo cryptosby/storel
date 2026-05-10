@@ -56,8 +56,8 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         },
         comments: [
             // Es importante que la fecha esté en formato ISO string
-            { id: 01, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Amazing! I love the depth of the colors.', date: '2025-10-17T12:00:00Z', replies: [] }, // Comentario de hace ~1 día
-            { id: 02, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Excellent price for this quality. Highly recommended.', date: '2025-10-18T10:00:00Z', replies: [] } // Comentario de hace ~7 horas
+            { id: 01, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Este producto superó mis expectativas. La calidad es excelente y cumple perfectamente con lo que promete. ¡Totalmente recomendado!', date: '2025-10-17T12:00:00Z', replies: [] }, // Comentario de hace ~1 día
+            { id: 02, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Me encanta este producto, la calidad es excelente y cumple todas mis expectativas. Sin duda lo recomendaría a mis amigos y familiares. ¡Una gran compra!', date: '2025-10-18T10:00:00Z', replies: [] } // Comentario de hace ~7 horas
         ]
     }
 ];
