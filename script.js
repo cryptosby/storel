@@ -38,7 +38,8 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         }, // <--- Esta coma es importante
         landingContent: {
             show: true, 
-            extendedDescription: "Este es un espacio para tu descripción extendida. Aquí puedes escribir párrafos largos, detalles técnicos o la propuesta de valor de tu producto digital.",
+            extendedDescription: "Este PDF aborda los desafíos comunes que impiden el crecimiento en YouTube y la necesidad de un sistema estructurado para superar las excusas y lograr el éxito.
+            Superando las Excusas para Crecer en YouTube: a) Muchos aspiran a crecer en YouTube, pero las excusas se interponen. b) La clave no es la falta de ideas, sino la ausencia de un sistema..",
             features: [
                 { label: "Formato", value: "PDF" },
                 { label: "Calidad", value: "Alta Definición" },
@@ -48,8 +49,8 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         },
         comments: [
             // Es importante que la fecha esté en formato ISO string
-            { id: 01, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Este producto superó mis expectativas. La calidad es excelente y cumple perfectamente con lo que promete. ¡Totalmente recomendado!', date: '2025-10-17T12:00:00Z', replies: [] }, // Comentario de hace ~1 día
-            { id: 02, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Me encanta este producto, la calidad es excelente y cumple todas mis expectativas. Sin duda lo recomendaría a mis amigos y familiares. ¡Una gran compra!', date: '2025-10-18T10:00:00Z', replies: [] } // Comentario de hace ~7 horas
+            { id: 01, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Este producto superó mis expectativas. La calidad es excelente y cumple perfectamente con lo que promete. ¡Totalmente recomendado!', date: '2026-01-18T12:11:00Z', replies: [] }, // Comentario de hace ~1 día
+            { id: 02, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Me encanta este producto, la calidad es excelente y cumple todas mis expectativas. Sin duda lo recomendaría a mis amigos y familiares. ¡Una gran compra!', date: '2026-01-17T10:05:00Z', replies: [] } // Comentario de hace ~7 horas
         ]
     }
 ];
