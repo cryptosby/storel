@@ -1,6 +1,14 @@
 // =================================================================
 // CONFIGURACIÓN Y DATA ESTATICA (English Translation)
 // =================================================================
+// --- CONFIGURACIÓN DE SERVIDORES EXTERNOS (INDEPENDIENTE) ---
+const IMG_SERVER = "https://i.ibb.co/"; // Ejemplo: Tu servidor de imágenes
+const SERV_IMAGENES_A = "https://i.ibb.co/"; 
+const SERV_IMAGENES_B = "https://imgur.com/";
+const SERV_PDFS = "https://mega.nz/file/";
+const SERV_VIDEOS = "https://drive.google.com/uc?id=";
+const FILE_SERVER = "https://mega.nz/file/"; // Ejemplo: Tu servidor de descargas
+const PRO_USER_IMG = "https://placehold.co/100x100/3b82f6/ffffff?text=Admin"; // Tu foto de Admin (100x100 recomendado)
 
 // CONFIGURACIÓN GLOBAL DE BOTONES DE PAGO (Solo define la estructura y el delay global)
 const paymentButtonsConfig = [
@@ -16,15 +24,15 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
     {
         id: 1,
         user: 'Smart',
-        userImage: 'https://i.postimg.cc/P5p883pm/Adm-digital-product-marketplace-social-networks-(modi).png',
-        title: 'Youtube Shorts Guia "Cero Excusas"',
-        description: '¡Descubre cómo dominar rápidamente los vídeos cortos de YouTube para alcanzar el éxito digital!',
+        userImage: 'https://postimg.cc/VJwNxFF6',
+        title: 'YouTube Shorts Guia "Cero Excusas"',
+        description: 'Descubre cómo dominar rápidamente los vídeos cortos de YouTube para alcanzar el éxito digital.',
         mediaUrl: 'https://go.screenpal.com/watch/cOhQeBntIiV', 
-        tags: ['photo', 'producto digital', 'pdf', 'png', 'ebook', 'youtube', 'video'], 
-        fileUrl: 'https://www.youtube.com/watch?v=ZPIL8TZdEmA', 
-        fileType: 'Video',
-        fileSize: '2.2 MB',
-        price: '29',
+        tags: ['photo', 'pdf', 'producto digital', 'png', 'youtube', 'video short', 'ebook'], 
+        fileUrl: 'https://enlace.seguro.de/tuproducto', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
+        fileType: 'image',
+        fileSize: '2.4 MB',
+        price: '29'usd,
         isFree: false,
         showFileInfo: false,
         likes: 5,
@@ -34,12 +42,22 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
             paypal: false,
             bank: false,
             donate: false,
-            crypto: false
+            crypto: false,
+        }, // <--- Esta coma es importante
+        landingContent: {
+            show: true, 
+            extendedDescription: "Este es un espacio para tu descripción extendida. Aquí puedes escribir párrafos largos, detalles técnicos o la propuesta de valor de tu producto digital.",
+            features: [
+                { label: "Formato", value: "PDF / MP4" },
+                { label: "Calidad", value: "Alta Definición" },
+                { label: "Entrega", value: "Inmediata" },
+                { label: "Licencia", value: "Uso Personal" }
+            ]
         },
         comments: [
             // Es importante que la fecha esté en formato ISO string
-            { id: 101, user: 'Ana Garcia', userImage: 'https://postimg.cc/DJ1vpJbf', text: 'Amazing! I love the depth of the colors.', date: '2025-10-17T12:00:00Z', replies: [] }, // Comentario de hace ~1 día
-            { id: 102, user: 'Arturo Mendez', userImage: 'https://postimg.cc/06pFLpZF', text: 'Excellent price for this quality. Highly recommended.', date: '2025-10-18T10:00:00Z', replies: [] } // Comentario de hace ~7 horas
+            { id: 01, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Amazing! I love the depth of the colors.', date: '2025-10-17T12:00:00Z', replies: [] }, // Comentario de hace ~1 día
+            { id: 02, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Excellent price for this quality. Highly recommended.', date: '2025-10-18T10:00:00Z', replies: [] } // Comentario de hace ~7 horas
         ]
     }
 ];
@@ -171,19 +189,22 @@ function renderAllPosts(filteredPosts = posts) {
         const card = document.createElement('div');
         card.className = 'card';
         
-        // GENERACIÓN DE BOTONES DE PAGO INDIVIDUALES
-        const paymentButtonsHTML = paymentButtonsConfig
-            // FILTRA solo los botones habilitados en el objeto paymentOptions del post
-            .filter(btn => post.paymentOptions && post.paymentOptions[btn.id] === true)
-            .map(btn => `
-                <button onclick="window.open('${post.fileUrl}', '_blank')" 
-                        class="buy-button hidden bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white ${btn.color} hover:text-white"
-                        id="${btn.id}-button-${post.id}">
-                    <i class="${btn.icon} text-lg"></i>
-                    <span>${btn.label}</span>
-                    <span class="text-xs">${btn.label === 'Thanks' ? 'Donation' : 'View Option'}</span>
-                </button>
-            `).join('');
+        // GENERACIÓN DE BOTONES DE PAGO (Versión Ultra-Segura)
+const paymentButtonsHTML = paymentButtonsConfig
+    .filter(btn => post.paymentOptions && post.paymentOptions[btn.id] === true)
+    .map(btn => {
+        return `
+            <button class="payment-btn buy-button hidden bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white ${btn.color} hover:text-white"
+                    data-method="${btn.id}" 
+                    data-price="${post.price}" 
+                    data-title="${post.title}"
+                    id="${btn.id}-button-${post.id}">
+                <i class="${btn.icon} text-lg"></i>
+                <span>${btn.label}</span>
+                <span class="text-xs">${btn.label === 'Thanks' ? 'Donation' : 'View Option'}</span>
+            </button>
+        `;
+    }).join('');
 
         // --- Generate Comments HTML (Banner Reubicado) ---
         let commentsHtml = '';
@@ -279,6 +300,30 @@ function renderAllPosts(filteredPosts = posts) {
             </div>
             
             <div class="ad-banner text-xs sm:text-sm mt-6">Advertisement: Above Buttons (Ad 4)</div>
+            
+            <!-- COMPLEMENTO INDEPENDIENTE: INFORMACIÓN EXTENDIDA (LANDING VIEW) -->
+            ${post.landingContent && post.landingContent.show ? `
+                <div class="my-5 p-5 border border-blue-100 dark:border-blue-900/50 bg-blue-50/30 dark:bg-gray-800/40 rounded-2xl shadow-sm landing-section-fade">
+                    <div class="flex items-center mb-4">
+                        <div class="w-1 h-6 bg-blue-600 rounded-full mr-3"></div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-blue-700 dark:text-blue-400">Detalles del Producto</h3>
+                    </div>
+                    
+                    <div class="text-sm text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                        ${post.landingContent.extendedDescription}
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        ${post.landingContent.features.map(f => `
+                            <div class="flex flex-col p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                                <span class="text-[9px] uppercase text-gray-400 font-extrabold mb-1">${f.label}</span>
+                                <span class="text-xs font-semibold text-gray-800 dark:text-gray-100">${f.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+            <!-- FIN DEL COMPLEMENTO -->
 
             <a href="${post.fileUrl}" target="_blank" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-center text-lg font-bold hover:bg-blue-700 transition-colors block mx-auto my-4">
                 <i class="fas fa-shopping-bag mr-2"></i> Buy Now!
@@ -481,3 +526,58 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTheme();
     renderAllPosts(); 
 });
+
+// Este código detecta los clics de forma profesional y segura
+document.addEventListener('click', function(e) {
+    // Verificamos si lo que se clickeó es uno de nuestros botones de pago
+    const btn = e.target.closest('.payment-btn');
+    if (btn) {
+        const method = btn.getAttribute('data-method');
+        const price = btn.getAttribute('data-price');
+        const title = btn.getAttribute('data-title');
+        
+        // Llamamos a la función de pago
+        handlePaymentClick(method, price, title);
+    }
+});
+
+function handlePaymentClick(method, price, title) {
+    console.log("¡Clic exitoso en:", method);
+
+    let url = "";
+    // --- TUS DATOS REALES ---
+    const miTelefono = "521234567890"; 
+    const miTelegram = "TuUsuario";     
+    const miPaypal = "TuUsuario";
+
+    // --- ENLACES A TUS DOCUMENTOS PDF (Súbelos a Drive/Dropbox y pega el link aquí) ---
+    const pdfBanco = "https://tu-sitio.com/instrucciones-banco.pdf";
+    const pdfCrypto = "https://tu-sitio.com/instrucciones-crypto.pdf";
+
+    if (method === 'whatsapp') {
+        url = "https://wa.me/" + miTelefono + "?text=" + encodeURIComponent("Hola, quiero información de: " + title);
+    
+    } else if (method === 'telegram') {
+        url = "https://t.me/" + miTelegram;
+    
+    } else if (method === 'paypal') {
+        url = "https://www.paypal.com/paypalme/" + miPaypal + "/" + price;
+    
+    } else if (method === 'donate') {
+        // Puedes usar un link de PayPal Donate o Ko-fi
+        url = "https://www.paypal.com/donate?hosted_button_id=TU_ID_AQUI";
+
+    } else if (method === 'bank') {
+        // En lugar de alert, abrimos el PDF profesional
+        url = pdfBanco;
+
+    } else if (method === 'crypto') {
+        // Abrimos el PDF con el QR de tu Wallet
+        url = pdfCrypto;
+    }
+
+    // Ejecución de la apertura
+    if (url) {
+        window.open(url, '_blank');
+    }
+}
