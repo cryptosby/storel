@@ -38,7 +38,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         }, // <--- Esta coma es importante
         landingContent: {
             show: true, 
-            extendedDescription: "Este PDF aborda los desafíos comunes que impiden el crecimiento en YouTube y la necesidad de un sistema estructurado para superar las excusas y lograr el éxito. Superando las Excusas para Crecer en YouTube: Muchos aspiran a crecer en YouTube, pero las excusas se interponen. La clave no es la falta de ideas, sino la ausencia de un sistema.",
+            extendedDescription: "Este PDF aborda los desafíos comunes que impiden el crecimiento en YouTube y la necesidad de un sistema estructurado para superar las excusas y lograr el éxito.",
             features: [
                 { label: "Formato", value: "PDF / MP4" },
                 { label: "Calidad", value: "Alta Definición" },
