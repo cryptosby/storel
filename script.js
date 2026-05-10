@@ -22,7 +22,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         mediaUrl: 'https://go.screenpal.com/watch/cOhQeBntIiV', 
         tags: ['photo', 'pdf', 'producto digital', 'png', 'youtube', 'video short', 'ebook'], 
         fileUrl: 'https://enlace.seguro.de/tuproducto', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
-        fileType: 'image',
+        fileType: 'video',
         fileSize: '2.4 MB',
         price: '29',
         isFree: false,
@@ -40,7 +40,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
             show: true, 
             extendedDescription: "Este es un espacio para tu descripción extendida. Aquí puedes escribir párrafos largos, detalles técnicos o la propuesta de valor de tu producto digital.",
             features: [
-                { label: "Formato", value: "PDF / MP4" },
+                { label: "Formato", value: "PDF" },
                 { label: "Calidad", value: "Alta Definición" },
                 { label: "Entrega", value: "Inmediata" },
                 { label: "Licencia", value: "Uso Personal" }
