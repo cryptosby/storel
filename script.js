@@ -19,12 +19,12 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         userImage: 'https://i.postimg.cc/P5p883pm/Adm-digital-product-marketplace-social-networks-(modi).png',
         title: 'YouTube Shorts Guia "Cero Excusas"',
         description: 'Descubre cómo dominar rápidamente los vídeos cortos de YouTube para alcanzar el éxito digital.',
-        mediaUrl: 'youtubeshortstorel.mp4', 
+        mediaUrl: 'youtubeshortstorel.mp4', // El video que subiste a GitHub
         tags: ['photo', 'pdf', 'producto digital', 'png', 'youtube', 'video short', 'ebook'], 
         fileUrl: 'https://enlace.seguro.de/tuproducto', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
-        fileType: 'video',
+        fileType: 'video', // Indica que el tipo de archivo es un video
         fileSize: '2.4 MB',
-        price: '29',
+        price: '29', usd
         isFree: false,
         showFileInfo: false,
         likes: 5,
