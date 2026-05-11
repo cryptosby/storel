@@ -24,7 +24,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         fileUrl: 'https://enlace.seguro.de/tuproducto', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
         fileType: 'video', // Indica que el tipo de archivo es un video
         fileSize: '2.4 MB',
-        price: '29', usd
+        price: '29',
         isFree: false,
         showFileInfo: false,
         likes: 5,
