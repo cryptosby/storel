@@ -21,7 +21,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         description: 'Descubre cómo dominar rápidamente los vídeos cortos de YouTube para alcanzar el éxito digital.',
         mediaUrl: 'youtubeshortstorel.mp4', // El video que subiste a GitHub
         tags: ['photo', 'pdf', 'producto digital', 'png', 'youtube', 'video short', 'ebook'], 
-        fileUrl: 'https://enlace.seguro.de/tuproducto', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
+        fileUrl: 'https://www.paypal.com/ncp/payment/L46LMRMN76FC4', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
         fileType: 'video', // Indica que el tipo de archivo es un video
         fileSize: '2.4 MB',
         price: '29',
