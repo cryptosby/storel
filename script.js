@@ -38,14 +38,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         }, // <--- Esta coma es importante
         landingContent: {
             show: true, 
-            extendedDescription: "Youtube videos shorts te permite crear videos que tienen una duración menor a 60 segundos, este producto digital destaca el potencial para creadores como una nueva estrategia de marketing efectiva para llegar a audiencias diversas a nivel global en tiempo record.
-Demostrado que en esta era de la informacion, internet es un medio donde personas interesantes con historias interesantes descubren que tienen el potencial para crear libros de poesía, ser un educador en cualquier tema, promocionar sus productos fisicos o digitales, etc.
-Videos shorts basados en dispositivos móviles están transformando las redes sociales, maximizando un alcance orgánico con miles de millones de vistas diarias.
-Aborda los desafíos comunes que impiden el crecimiento en YouTube y la necesidad de un sistema estructurado para superar las excusas y lograr el éxito.
-a) Muchos aspiran a crear contenido en YouTube, pero las excusas se interponen.
-b) La clave no es la falta de ideas, sino la ausencia de un sistema.
-c) Desconocimiento y falta de información o exceso de información que termina por confundir.
-",
+            extendedDescription: "Youtube videos shorts te permite crear videos que tienen una duración menor a 60 segundos, este producto digital destaca el potencial para creadores como una nueva estrategia de marketing efectiva para llegar a audiencias diversas a nivel global en tiempo record.<br> Demostrado que en esta era de la informacion, internet es un medio donde personas interesantes con historias interesantes descubren que tienen el potencial para crear libros de poesía, ser un educador en cualquier tema, promocionar sus productos fisicos o digitales, etc.<br> Videos shorts basados en dispositivos móviles están transformando las redes sociales, maximizando un alcance orgánico con miles de millones de vistas diarias. <br> Aborda los desafíos comunes que impiden el crecimiento en YouTube y la necesidad de un sistema estructurado para superar las excusas y lograr el éxito. <br> a) Muchos aspiran a crear contenido en YouTube, pero las excusas se interponen. <br> b) La clave no es la falta de ideas, sino la ausencia de un sistema. <br> c) Desconocimiento y falta de información o exceso de información que termina por confundir.",
             features: [
                 { label: "Formato", value: "Oferta ganadora "Pack Multimedia": PDF (Guía Maestra)+ Version Audio MP3 ("Audiolibro"),6 Videos lecciones de implementación + Video Shorts 'Reels'(Píldoras de Acción)." },
                 { label: "Calidad", value: "Alta Definición" },
