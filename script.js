@@ -85,34 +85,34 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
             { id: 33, user: '', userImage: '', text: '', date: '2026-03-28T23:01:00Z', replies: [] }, // Comentario de hace ~4 meses
             { id: 32, user: '', userImage: '', text: '', date: '2026-03-27T13:28:00Z', replies: [] }, // Comentario de hace ~4 meses
             { id: 31, user: '', userImage: '', text: '', date: '2026-03-25T02:08:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 30, user: '', userImage: '', text: '', date: '2026-03-20T12:15:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 29, user: '', userImage: '', text: '', date: '2026-03-17T01:55:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 28, user: '', userImage: '', text: '', date: '2026-03-14T06:07:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 27, user: '', userImage: '', text: '', date: '2026-03-08T23:01:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 26, user: '', userImage: '', text: '', date: '2026-03-07T13:28:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 25, user: '', userImage: '', text: '', date: '2026-03-05T02:08:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 24, user: '', userImage: '', text: '', date: '2026-03-04T12:15:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 23, user: '', userImage: '', text: '', date: '2026-02-28T06:10:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 22, user: '', userImage: '', text: '', date: '2026-02-26T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 21, user: '', userImage: '', text: '', date: '2026-02-25T17:44:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 20, user: '', userImage: '', text: '', date: '2026-02-22T01:11:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 19, user: '', userImage: '', text: '', date: '2026-02-18T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 18, user: '', userImage: '', text: '', date: '2026-02-16T06:07:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 17, user: '', userImage: '', text: '', date: '2026-02-15T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 16, user: '', userImage: '', text: '', date: '2026-02-12T13:28:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 15, user: '', userImage: '', text: '', date: '2026-02-11T00:03:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 14, user: '', userImage: '', text: '', date: '2026-02-08T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 13, user: '', userImage: '', text: '', date: '2026-02-06T07:10:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 12, user: '', userImage: '', text: '', date: '2026-02-05T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 11, user: '', userImage: '', text: '', date: '2026-02-02T17:44:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 10, user: '', userImage: '', text: '', date: '2026-02-01T00:18:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 09, user: '', userImage: '', text: '', date: '2026-01-26T07:26:00Z', replies: [] }, // Comentario de hace ~6 meses
-            { id: 08, user: '', userImage: '', text: '', date: '2026-01-25T09:06:00Z', replies: [] }, // Comentario de hace ~6 meses
-            { id: 07, user: '', userImage: '', text: '', date: '2026-01-24T17:27:00Z', replies: [] }, // Comentario de hace ~6 meses
-            { id: 06, user: '', userImage: '', text: '', date: '2026-01-23T20:13:00Z', replies: [] }, // Comentario de hace ~6 meses
-            { id: 05, user: '', userImage: '', text: '', date: '2026-01-22T10:05:00Z', replies: [] }, // Comentario de hace ~6 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-01-21T02:11:00Z', replies: [] }, // Comentario de hace ~6 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-01-20T08:35:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 30, user: '', userImage: '', text: 'Conseguir participación y comentarios ya no es un misterio. Las tácticas de esta guía realmente conectan con la gente.', date: '2026-03-20T12:15:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 29, user: '', userImage: '', text: 'El crecimiento de mi audiencia ha sido explosivo. Esta guía te enseña exactamente cómo posicionarte rápido en YouTube.', date: '2026-03-17T01:55:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 28, user: '', userImage: '', text: 'Quería que mi canal fuera más visible y esta guía me dio las claves exactas para dominar el feed de Shorts.', date: '2026-03-14T06:07:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 27, user: '', userImage: '', text: 'En solo dos semanas aplicando estas estrategias de crecimiento, mi audiencia se duplicó. ¡La visibilidad en YouTube es real!', date: '2026-03-08T23:01:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 26, user: '', userImage: '', text: 'Me resolvió la vida. Ahora puedo delegar la lluvia de ideas y la redacción de guiones a la IA de manera estratégica.', date: '2026-03-07T13:28:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 25, user: '', userImage: '', text: 'Usar las herramientas de Inteligencia Artificial que recomiendan me ayudó a mejorar la resolución visual y el impacto de mis videos sin ser diseñador.', date: '2026-03-05T02:08:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 24, user: '', userImage: '', text: 'La guía te enseña a superar cualquier obstáculo técnico o creativo rápidamente. Es un manual de supervivencia para creadores.', date: '2026-03-04T12:15:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 23, user: '', userImage: '', text: 'Pude resolver mis problemas de retención gracias a los consejos de optimización. ¡Mis espectadores ahora ven mis videos completos!', date: '2026-02-28T06:10:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 22, user: '', userImage: '', text: 'Si sufres de bloqueo creativo, esta guía soluciona todos tus problemas. La IA te da ideas infinitas y listas para usar.', date: '2026-02-26T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 21, user: '', userImage: '', text: 'Las herramientas con IA que enseñan a usar son un antes y un después. Ahora edito y publico en la mitad del tiempo.', date: '2026-02-25T17:44:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 20, user: '', userImage: '', text: 'Estaba atascado sin saber cómo resolver la falta de interacción en mis videos. La guía me dio las soluciones exactas para mejorar mi participación.', date: '2026-02-22T01:11:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 19, user: '', userImage: '', text: '¡La integración de herramientas de Inteligencia Artificial que recomiendan te ahorra horas de trabajo! Es como tener un asistente personal.', date: '2026-02-18T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 18, user: '', userImage: '', text: 'Las ideas de contenido están súper bien estructuradas. Pasé de no saber qué grabar a tener un calendario de publicaciones para todo el mes.', date: '2026-02-16T06:07:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 17, user: '', userImage: '', text: 'Me encanta que te explican el formato exacto que funciona hoy en día. Nada de rodeos, te muestran lo que realmente le gusta a la plataforma.', date: '2026-02-15T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 16, user: '', userImage: '', text: 'La optimización del canal que proponen es increíble. Mis videos ahora aparecen en las búsquedas correctas gracias a sus técnicas.', date: '2026-02-12T13:28:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 15, user: '', userImage: '', text: 'Las estrategias de contenido que enseñan aquí son oro puro. Ya no publico por publicar; ahora todo tiene un propósito.', date: '2026-02-11T00:03:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 14, user: '', userImage: '', text: 'Aprender a optimizar el formato y la duración de mis Shorts cambió mi alcance. ¡Mis métricas se dispararon en solo unos días!', date: '2026-02-08T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 13, user: '', userImage: '', text: '¡Se me acababan las ideas de contenido! Este curso me dio un catálogo inmenso de temas estratégicos para no quedarme nunca en blanco.', date: '2026-02-06T07:10:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 12, user: '', userImage: '', text: 'La sección de mejores prácticas me voló la cabeza. Ahora sé exactamente cómo estructurar mis videos para retener a la audiencia.', date: '2026-02-05T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 11, user: '', userImage: '', text: 'Tenía mi canal abandonado por falta de conocimientos técnicos. Esta guía me salvó la vida y me hizo el proceso súper sencillo.', date: '2026-02-02T17:44:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 10, user: '', userImage: '', text: 'Empecé desde cero y en menos de una semana ya tenía mis primeros tres Shorts publicados gracias a las instrucciones de esta guía.', date: '2026-02-01T00:18:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 09, user: '', userImage: '', text: '¡Por fin un curso que no te abruma con tecnicismos! La guía es súper práctica y directa al grano para los que no sabemos nada.', date: '2026-01-26T07:26:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 08, user: '', userImage: '', text: 'Si eres principiante total, este es el mejor punto de partida. Explican todo tan claro que mi abuela podría empezar a subir videos hoy mismo.', date: '2026-01-25T09:06:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 07, user: '', userImage: '', text: 'Llevaba meses queriendo empezar en YouTube y me daba pánico la cámara. Esta guía me quitó el miedo y me enseñó lo fácil que es crear contenido.', date: '2026-01-24T17:27:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 06, user: '', userImage: '', text: 'Lo que más me gustó de "Cero Excusas" es que no necesitas experiencia previa. Te llevan de la mano paso a paso. ¡100% recomendada!', date: '2026-01-23T20:13:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 05, user: '', userImage: '', text: '¡Pensé que YouTube era solo para videos largos y complicados! Con esta guía pasé de cero conocimientos a entender exactamente cómo funciona el algoritmo de los Shorts.', date: '2026-01-22T10:05:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 04, user: '', userImage: '', text: 'Estoy satisfecho con este multipack! La calidad es muy buena y cumple totalmente lo que dice.', date: '2026-01-21T02:11:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 03, user: '', userImage: '', text: 'Este pack me parece alto pero creo que tambien la calidad es decir calidad-precio, contenido accesible. ¡Una compra que vale la pena!', date: '2026-01-20T08:35:00Z', replies: [] }, // Comentario de hace ~6 meses
             { id: 02, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Este producto superó mis expectativas. La calidad es excelente y cumple perfectamente con lo que promete. ¡Totalmente recomendado!', date: '2026-01-18T12:11:00Z', replies: [] }, // Comentario de hace ~6 meses
             { id: 01, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Me encanta este producto, la calidad es excelente y cumple todas mis expectativas. Sin duda lo recomendaría a mis amigos y familiares. ¡Una gran compra!', date: '2026-01-17T10:05:00Z', replies: [] } // Comentario de hace ~6 meses        
                
