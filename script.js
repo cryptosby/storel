@@ -18,13 +18,13 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         user: 'Smart50',
         userImage: 'https://i.postimg.cc/P5p883pm/Adm-digital-product-marketplace-social-networks-(modi).png',
         title: 'YouTube Shorts Guia "Cero Excusas"',
-        description: 'Descubre cómo dominar rápidamente los vídeos cortos de YouTube para alcanzar el éxito digital.',
+        description: 'Producto digital: "videos Shorts en YouTube". Plan integral: Cero conocimientos, las mejores prácticas para maximizar creación de contenido de forma estratégica,ideas de contenido, formato, duración, optimización, análisis, resolución de problemas y estrategias de expansión comercial. Construye un ecosistema sostenible y escalable en una plataforma con un alto volumen de tráfico. Segmento vertical para la monetización de ingresos. Herramientas de contenido con inteligencia artificial. Domina rápidamente visibilidad y participación en crecimiento de audiencia, impulsar marcas, promoción de negocios de comercio electrónico, etc.',
         mediaUrl: 'youtubeshortstorel.mp4', // El video que subiste a GitHub
         tags: ['photo', 'pdf', 'producto digital', 'png', 'youtube', 'video short', 'ebook'], 
         fileUrl: 'https://www.paypal.com/ncp/payment/L46LMRMN76FC4', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
         fileType: 'video', // Indica que el tipo de archivo es un video
         fileSize: '2.4 MB',
-        price: '29',
+        price: '1.50',
         isFree: false,
         showFileInfo: false,
         likes: 5,
@@ -38,9 +38,16 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         }, // <--- Esta coma es importante
         landingContent: {
             show: true, 
-            extendedDescription: "Este PDF aborda los desafíos comunes que impiden el crecimiento en YouTube y la necesidad de un sistema estructurado para superar las excusas y lograr el éxito. Superando las Excusas para Crecer en YouTube: a) Muchos aspiran a crecer en YouTube, pero las excusas se interponen. b) La clave no es la falta de ideas, sino la ausencia de un sistema.",
+            extendedDescription: "Youtube videos shorts te permite crear videos que tienen una duración menor a 60 segundos, este producto digital destaca el potencial para creadores como una nueva estrategia de marketing efectiva para llegar a audiencias diversas a nivel global en tiempo record.
+Demostrado que en esta era de la informacion, internet es un medio donde personas interesantes con historias interesantes descubren que tienen el potencial para crear libros de poesía, ser un educador en cualquier tema, promocionar sus productos fisicos o digitales, etc.
+Videos shorts basados en dispositivos móviles están transformando las redes sociales, maximizando un alcance orgánico con miles de millones de vistas diarias.
+Aborda los desafíos comunes que impiden el crecimiento en YouTube y la necesidad de un sistema estructurado para superar las excusas y lograr el éxito.
+a) Muchos aspiran a crear contenido en YouTube, pero las excusas se interponen.
+b) La clave no es la falta de ideas, sino la ausencia de un sistema.
+c) Desconocimiento y falta de información o exceso de información que termina por confundir.
+",
             features: [
-                { label: "Formato", value: "PDF" },
+                { label: "Formato", value: "Oferta ganadora "Pack Multimedia": PDF (Guía Maestra)+ Version Audio MP3 ("Audiolibro"),6 Videos lecciones de implementación + Video Shorts 'Reels'(Píldoras de Acción)." },
                 { label: "Calidad", value: "Alta Definición" },
                 { label: "Entrega", value: "Inmediata" },
                 { label: "Licencia", value: "Uso Personal" }
