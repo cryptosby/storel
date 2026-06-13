@@ -24,7 +24,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         fileUrl: 'https://www.paypal.com/ncp/payment/L46LMRMN76FC4', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
         fileType: 'video', // Indica que el tipo de archivo es un video
         fileSize: '2.4 MB',
-        price: '1.50',
+        price: '1.53',
         isFree: false,
         showFileInfo: false,
         likes: 5,
@@ -40,17 +40,49 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
             show: true, 
             extendedDescription: "Youtube videos shorts te permite crear videos que tienen una duración menor a 60 segundos, este producto digital destaca el potencial para creadores como una nueva estrategia de marketing efectiva para llegar a audiencias diversas a nivel global en tiempo record. Demostrado que en esta era de la informacion, internet es un medio donde personas interesantes con historias interesantes descubren que tienen el potencial para crear libros de poesía, ser un educador en cualquier tema, promocionar sus productos fisicos o digitales, etc. Videos shorts basados en dispositivos móviles están transformando las redes sociales, maximizando un alcance orgánico con miles de millones de vistas diarias. Aborda los desafíos comunes que impiden el crecimiento en YouTube y la necesidad de un sistema estructurado para superar las excusas y lograr el éxito. a) Muchos aspiran a crear contenido en YouTube, pero las excusas se interponen. b) La clave no es la falta de ideas, sino la ausencia de un sistema. c) Desconocimiento y falta de información o exceso de información que termina por confundir.",
             features: [
-                { label: "Formato", value: "PDF (Guía Maestra) + Version Audio MP3 ('Audiolibro') + 6 Videos lecciones de implementación + Video Shorts 'Reels' (Píldoras de Acción)." },
-                { label: "Calidad", value: "Alta Definición" },
+                { label: "Formato", value: "PDF (Guía Maestra) + Audio MP3 ('Audiolibro') + 6 Videos lecciones para implementar + 3000 Video Shorts 'Reels' (Píldoras de Acción)." },
+                { label: "Calidad", value: "Alta Definición 476.8 MB" },
                 { label: "Entrega", value: "Inmediata" },
                 { label: "Licencia", value: "Uso Personal" }
             ]
         },
         comments: [
             // Es importante que la fecha esté en formato ISO string
-            { id: 01, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Este producto superó mis expectativas. La calidad es excelente y cumple perfectamente con lo que promete. ¡Totalmente recomendado!', date: '2026-01-18T12:11:00Z', replies: [] }, // Comentario de hace ~1 día
-            { id: 02, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Me encanta este producto, la calidad es excelente y cumple todas mis expectativas. Sin duda lo recomendaría a mis amigos y familiares. ¡Una gran compra!', date: '2026-01-17T10:05:00Z', replies: [] } // Comentario de hace ~7 horas
-        ]
+            { id: 04, user: '', userImage: '', text: '', date: '2026-04-07T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-04-02T06:07:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-03-28T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-03-27T13:28:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-03-25T2:08:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-03-20T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-03-17T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-03-14T06:07:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-03-08T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-03-07T13:28:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-03-05T2:08:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-03-04T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-02-28T6:10:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-02-26T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-02-25T17:44:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-02-22T2:11:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-02-18T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-02-16T06:07:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-02-15T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-02-12T13:28:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-02-11T2:08:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-02-08T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-02-06T6:10:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-02-05T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-02-02T17:44:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-02-01T2:11:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-01-26T7:26:00Z', replies: [] } // Comentario de hace ~6 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-01-25T9:06:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-01-24T17:27:00Z', replies: [] } // Comentario de hace ~6 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-01-23T20:13:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-01-22T10:05:00Z', replies: [] } // Comentario de hace ~6 meses
+            { id: 04, user: '', userImage: '', text: '', date: '2026-01-21T2:11:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 03, user: '', userImage: '', text: '', date: '2026-01-20T8:35:00Z', replies: [] } // Comentario de hace ~6 meses
+            { id: 02, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Este producto superó mis expectativas. La calidad es excelente y cumple perfectamente con lo que promete. ¡Totalmente recomendado!', date: '2026-01-18T12:11:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 01, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Me encanta este producto, la calidad es excelente y cumple todas mis expectativas. Sin duda lo recomendaría a mis amigos y familiares. ¡Una gran compra!', date: '2026-01-17T10:05:00Z', replies: [] } // Comentario de hace ~4 meses        ]
     }
 ];
 
