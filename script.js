@@ -48,41 +48,73 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         },
         comments: [
             // Es importante que la fecha esté en formato ISO string
-            { id: 04, user: '', userImage: '', text: '', date: '2026-04-07T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-04-02T06:07:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-03-28T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-03-27T13:28:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-03-25T2:08:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-03-20T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-03-17T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-03-14T06:07:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-03-08T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-03-07T13:28:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-03-05T2:08:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-03-04T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-02-28T6:10:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-02-26T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-02-25T17:44:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-02-22T2:11:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-02-18T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-02-16T06:07:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-02-15T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-02-12T13:28:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-02-11T2:08:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-02-08T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-02-06T6:10:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-02-05T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-02-02T17:44:00Z', replies: [] } // Comentario de hace ~5 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-02-01T2:11:00Z', replies: [] }, // Comentario de hace ~5 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-01-26T7:26:00Z', replies: [] } // Comentario de hace ~6 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-01-25T9:06:00Z', replies: [] }, // Comentario de hace ~6 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-01-24T17:27:00Z', replies: [] } // Comentario de hace ~6 meses
-            { id: 04, user: '', userImage: '', text: '', date: '2026-01-23T20:13:00Z', replies: [] }, // Comentario de hace ~6 meses
-            { id: 03, user: '', userImage: '', text: '', date: '2026-01-22T10:05:00Z', replies: [] } // Comentario de hace ~6 meses
+            { id: 67, user: '', userImage: '', text: '', date: '2026-06-12T00:39:00Z', replies: [] }, // Comentario de hace ~24 horas
+            { id: 66, user: '', userImage: '', text: '', date: '2026-06-09T11:21:00Z', replies: [] }, // Comentario de hace ~72 horas
+            { id: 65, user: '', userImage: '', text: '', date: '2026-06-08T09:00:09Z', replies: [] }, // Comentario de hace ~1 semana
+            { id: 64, user: '', userImage: '', text: '', date: '2026-06-07T17:11:00Z', replies: [] }, // Comentario de hace ~1 semana
+            { id: 63, user: '', userImage: '', text: '', date: '2026-06-06T11:21:00Z', replies: [] }, // Comentario de hace ~1 semana
+            { id: 62, user: '', userImage: '', text: '', date: '2026-06-05T09:00:09Z', replies: [] }, // Comentario de hace ~1 semana
+            { id: 61, user: '', userImage: '', text: '', date: '2026-06-04T17:11:00Z', replies: [] }, // Comentario de hace ~1 semana
+            { id: 60, user: '', userImage: '', text: '', date: '2026-06-03T06:30:09Z', replies: [] }, // Comentario de hace ~2 semanas
+            { id: 59, user: '', userImage: '', text: '', date: '2026-06-02T10:45:00Z', replies: [] }, // Comentario de hace ~2 semanas
+            { id: 58, user: '', userImage: '', text: '', date: '2026-06-01T12:14:00Z', replies: [] }, // Comentario de hace ~2 semanas
+            { id: 57, user: '', userImage: '', text: '', date: '2026-05-30T10:51:00Z', replies: [] } // Comentario de hace ~1 mes
+            { id: 56, user: '', userImage: '', text: '', date: '2026-05-29T13:41:00Z', replies: [] }, // Comentario de hace ~1 mes
+            { id: 55, user: '', userImage: '', text: '', date: '2026-05-28T00:33:00Z', replies: [] } // Comentario de hace ~1 mes
+            { id: 54, user: '', userImage: '', text: '', date: '2026-05-26T11:48:00Z', replies: [] }, // Comentario de hace ~1 mes
+            { id: 53, user: '', userImage: '', text: '', date: '2026-05-25T16:02:00Z', replies: [] }, // Comentario de hace ~1 mes
+            { id: 52, user: '', userImage: '', text: '', date: '2026-05-24T9:13:00Z', replies: [] } // Comentario de hace ~1 mes
+            { id: 51, user: '', userImage: '', text: '', date: '2026-05-21T13:46:00Z', replies: [] }, // Comentario de hace ~1 mes
+            { id: 50, user: '', userImage: '', text: '', date: '2026-05-18T17:04:00Z', replies: [] } // Comentario de hace ~1 mes
+            { id: 49, user: '', userImage: '', text: '', date: '2026-05-15T01:05:00Z', replies: [] }, // Comentario de hace ~1 mes
+            { id: 48, user: '', userImage: '', text: '', date: '2026-05-09T13:37:00Z', replies: [] } // Comentario de hace ~2 meses
+            { id: 47, user: '', userImage: '', text: '', date: '2026-05-08T8:27:00Z', replies: [] }, // Comentario de hace ~2 meses
+            { id: 46, user: '', userImage: '', text: '', date: '2026-05-05T7:20:00Z', replies: [] } // Comentario de hace ~2 meses
+            { id: 45, user: '', userImage: '', text: '', date: '2026-05-04T21:29:00Z', replies: [] }, // Comentario de hace ~2 meses
+            { id: 44, user: '', userImage: '', text: '', date: '2026-05-03T00:17:00Z', replies: [] } // Comentario de hace ~2 meses
+            { id: 43, user: '', userImage: '', text: '', date: '2026-04-30T11:12:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 42, user: '', userImage: '', text: '', date: '2026-04-29T6:17:00Z', replies: [] } // Comentario de hace ~3 meses
+            { id: 41, user: '', userImage: '', text: '', date: '2026-04-27T11:29:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 40, user: '', userImage: '', text: '', date: '2026-04-26T6:02:00Z', replies: [] } // Comentario de hace ~3 meses
+            { id: 39, user: '', userImage: '', text: '', date: '2026-04-23T11:08:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 38, user: '', userImage: '', text: '', date: '2026-04-15T6:07:00Z', replies: [] } // Comentario de hace ~3 meses
+            { id: 37, user: '', userImage: '', text: '', date: '2026-04-14T11:25:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 36, user: '', userImage: '', text: '', date: '2026-04-09T6:07:00Z', replies: [] } // Comentario de hace ~3 meses
+            { id: 35, user: '', userImage: '', text: '', date: '2026-04-07T11:25:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 34, user: '', userImage: '', text: '', date: '2026-04-02T6:07:00Z', replies: [] } // Comentario de hace ~3 meses
+            { id: 33, user: '', userImage: '', text: '', date: '2026-03-28T23:01:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 32, user: '', userImage: '', text: '', date: '2026-03-27T13:28:00Z', replies: [] } // Comentario de hace ~4 meses
+            { id: 31, user: '', userImage: '', text: '', date: '2026-03-25T2:08:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 30, user: '', userImage: '', text: '', date: '2026-03-20T12:15:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 29, user: '', userImage: '', text: '', date: '2026-03-17T01:55:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 28, user: '', userImage: '', text: '', date: '2026-03-14T06:07:00Z', replies: [] } // Comentario de hace ~4 meses
+            { id: 27, user: '', userImage: '', text: '', date: '2026-03-08T23:01:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 26, user: '', userImage: '', text: '', date: '2026-03-07T13:28:00Z', replies: [] } // Comentario de hace ~4 meses
+            { id: 25, user: '', userImage: '', text: '', date: '2026-03-05T2:08:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 24, user: '', userImage: '', text: '', date: '2026-03-04T12:15:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 23, user: '', userImage: '', text: '', date: '2026-02-28T6:10:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 22, user: '', userImage: '', text: '', date: '2026-02-26T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 21, user: '', userImage: '', text: '', date: '2026-02-25T17:44:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 20, user: '', userImage: '', text: '', date: '2026-02-22T2:11:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 19, user: '', userImage: '', text: '', date: '2026-02-18T01:55:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 18, user: '', userImage: '', text: '', date: '2026-02-16T06:07:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 17, user: '', userImage: '', text: '', date: '2026-02-15T23:01:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 16, user: '', userImage: '', text: '', date: '2026-02-12T13:28:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 15, user: '', userImage: '', text: '', date: '2026-02-11T2:08:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 14, user: '', userImage: '', text: '', date: '2026-02-08T12:15:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 13, user: '', userImage: '', text: '', date: '2026-02-06T6:10:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 12, user: '', userImage: '', text: '', date: '2026-02-05T21:03:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 11, user: '', userImage: '', text: '', date: '2026-02-02T17:44:00Z', replies: [] } // Comentario de hace ~5 meses
+            { id: 10, user: '', userImage: '', text: '', date: '2026-02-01T2:11:00Z', replies: [] }, // Comentario de hace ~5 meses
+            { id: 09, user: '', userImage: '', text: '', date: '2026-01-26T7:26:00Z', replies: [] } // Comentario de hace ~6 meses
+            { id: 08, user: '', userImage: '', text: '', date: '2026-01-25T9:06:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 07, user: '', userImage: '', text: '', date: '2026-01-24T17:27:00Z', replies: [] } // Comentario de hace ~6 meses
+            { id: 06, user: '', userImage: '', text: '', date: '2026-01-23T20:13:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 05, user: '', userImage: '', text: '', date: '2026-01-22T10:05:00Z', replies: [] } // Comentario de hace ~6 meses
             { id: 04, user: '', userImage: '', text: '', date: '2026-01-21T2:11:00Z', replies: [] }, // Comentario de hace ~6 meses
             { id: 03, user: '', userImage: '', text: '', date: '2026-01-20T8:35:00Z', replies: [] } // Comentario de hace ~6 meses
-            { id: 02, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Este producto superó mis expectativas. La calidad es excelente y cumple perfectamente con lo que promete. ¡Totalmente recomendado!', date: '2026-01-18T12:11:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 01, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Me encanta este producto, la calidad es excelente y cumple todas mis expectativas. Sin duda lo recomendaría a mis amigos y familiares. ¡Una gran compra!', date: '2026-01-17T10:05:00Z', replies: [] } // Comentario de hace ~4 meses        ]
+            { id: 02, user: 'Ana Garcia', userImage: 'https://i.postimg.cc/76W56SHz/digital-product-marketplace-social-networks-2.jpg', text: 'Este producto superó mis expectativas. La calidad es excelente y cumple perfectamente con lo que promete. ¡Totalmente recomendado!', date: '2026-01-18T12:11:00Z', replies: [] }, // Comentario de hace ~6 meses
+            { id: 01, user: 'Arturo Mendez', userImage: 'https://i.postimg.cc/GpNRTKDL/digital-product-marketplace-social-networks-1.jpg', text: 'Me encanta este producto, la calidad es excelente y cumple todas mis expectativas. Sin duda lo recomendaría a mis amigos y familiares. ¡Una gran compra!', date: '2026-01-17T10:05:00Z', replies: [] } // Comentario de hace ~6 meses        ]
     }
 ];
 
