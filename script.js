@@ -488,8 +488,8 @@ function addComment(postId) {
 
     const newComment = {
         id: Date.now(), // ID único basado en la hora
-        user: 'You', // El usuario es 'You' (tú) ya que es local
-        userImage: 'https://placehold.co/30x30/059669/d1fae5?text=Y', // Ícono de 'You'
+        user: 'Smart', // El usuario es 'You' (tú) ya que es local
+        userImage: 'https://i.postimg.cc/P5p883pm/Adm-digital-product-marketplace-social-networks-(modi).png', // Ícono de 'You'
         text: commentText,
         date: new Date().toISOString(), // Guarda la fecha en formato ISO
         replies: []
@@ -514,8 +514,8 @@ function addReply(postId, commentId) {
 
     const newReply = {
         id: Date.now(), // ID único
-        user: 'You', // El usuario es 'You' (tú) ya que es local
-        userImage: 'https://placehold.co/30x30/059669/d1fae5?text=Y', // Ícono de 'You'
+        user: 'Smart', // El usuario es 'You' (tú) ya que es local
+        userImage: 'https://i.postimg.cc/P5p883pm/Adm-digital-product-marketplace-social-networks-(modi).png', // Ícono de 'You'
         text: replyText,
         date: new Date().toISOString() // Guarda la fecha en formato ISO
     };
