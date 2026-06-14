@@ -65,16 +65,16 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
             { id: 53, user: '', userImage: '', text: '', date: '2026-05-25T16:02:00Z', replies: [] }, // Comentario de hace ~1 mes
             { id: 52, user: '', userImage: '', text: '', date: '2026-05-24T09:13:00Z', replies: [] }, // Comentario de hace ~1 mes
             { id: 51, user: '', userImage: '', text: '', date: '2026-05-21T13:46:00Z', replies: [] }, // Comentario de hace ~1 mes
-            { id: 50, user: '', userImage: '', text: '', date: '2026-05-18T17:04:00Z', replies: [] }, // Comentario de hace ~1 mes
-            { id: 49, user: '', userImage: '', text: '', date: '2026-05-15T01:05:00Z', replies: [] }, // Comentario de hace ~1 mes
-            { id: 48, user: '', userImage: '', text: '', date: '2026-05-09T13:37:00Z', replies: [] }, // Comentario de hace ~2 meses
-            { id: 47, user: '', userImage: '', text: '', date: '2026-05-08T08:27:00Z', replies: [] }, // Comentario de hace ~2 meses
-            { id: 46, user: '', userImage: '', text: '', date: '2026-05-05T07:20:00Z', replies: [] }, // Comentario de hace ~2 meses
-            { id: 45, user: '', userImage: '', text: '', date: '2026-05-04T21:29:00Z', replies: [] }, // Comentario de hace ~2 meses
-            { id: 44, user: '', userImage: '', text: '', date: '2026-05-03T00:17:00Z', replies: [] }, // Comentario de hace ~2 meses
-            { id: 43, user: '', userImage: '', text: '', date: '2026-04-30T11:12:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 42, user: '', userImage: '', text: '', date: '2026-04-29T06:17:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 41, user: '', userImage: '', text: '', date: '2026-04-27T11:29:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 50, user: '', userImage: '', text: 'No lo pienses más, si quieres vivir de esto o escalar tu negocio, esta guía tiene todo el conocimiento necesario y más.', date: '2026-05-18T17:04:00Z', replies: [] }, // Comentario de hace ~1 mes
+            { id: 49, user: '', userImage: '', text: 'Compré la guía con dudas, pero es el curso más completo y accionable que he visto sobre YouTube Shorts. ¡Cero excusas para no triunfar.', date: '2026-05-15T01:05:00Z', replies: [] }, // Comentario de hace ~1 mes
+            { id: 48, user: '', userImage: '', text: 'Pude impulsar mi negocio de manera orgánica y rápida. Las técnicas de esta guía son el empujón que toda marca necesita.', date: '2026-05-09T13:37:00Z', replies: [] }, // Comentario de hace ~2 meses
+            { id: 47, user: '', userImage: '', text: 'Si tienes una marca y no estás usando Shorts, estás perdiendo dinero. Esta guía te da el plan maestro para dominar la plataforma.', date: '2026-05-08T08:27:00Z', replies: [] }, // Comentario de hace ~2 meses
+            { id: 46, user: '', userImage: '', text: 'La visibilidad que he ganado para mi negocio de comercio electrónico gracias a estas estrategias es impresionante. ¡Vale cada centavo!', date: '2026-05-05T07:20:00Z', replies: [] }, // Comentario de hace ~2 meses
+            { id: 45, user: '', userImage: '', text: 'Esta guía te enseña a darle a tu marca una visibilidad masiva en la plataforma con más tráfico del mundo.', date: '2026-05-04T21:29:00Z', replies: [] }, // Comentario de hace ~2 meses
+            { id: 44, user: '', userImage: '', text: 'Promocionar mi negocio en YouTube Shorts me trajo clientes que realmente estaban buscando mis servicios. ¡Es oro puro!', date: '2026-05-03T00:17:00Z', replies: [] }, // Comentario de hace ~2 meses
+            { id: 43, user: '', userImage: '', text: 'Mi marca personal despegó por completo. La guía me enseñó a proyectar profesionalismo y autoridad en videos de pocos segundos.', date: '2026-04-30T11:12:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 42, user: '', userImage: '', text: 'Las estrategias de expansión comercial que muestran te abren la mente. YouTube es una máquina de ventas si sabes usarla.', date: '2026-04-29T06:17:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 41, user: '', userImage: '', text: 'Logré promocionar mi tienda online a través de Shorts y el retorno de inversión ha sido brutal. ¡Totalmente recomendada!', date: '2026-04-27T11:29:00Z', replies: [] }, // Comentario de hace ~3 meses
             { id: 40, user: '', userImage: '', text: 'La monetización ya no es un sueño lejano. Con esta guía estructuré mi canal para generar ingresos estables y escalables.', date: '2026-04-26T06:02:00Z', replies: [] }, // Comentario de hace ~3 meses
             { id: 39, user: '', userImage: '', text: 'Aprender a construir un ecosistema digital con alto volumen de tráfico era lo que necesitaba para llevar mi marca al siguiente nivel.', date: '2026-04-23T11:08:00Z', replies: [] }, // Comentario de hace ~3 meses
             { id: 38, user: '', userImage: '', text: 'Tengo un negocio de e-commerce y usar esta guía para promocionar mis productos fue la mejor decisión del año. ¡Excelente inversión!', date: '2026-04-15T05:07:00Z', replies: [] }, // Comentario de hace ~3 meses
