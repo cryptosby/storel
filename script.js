@@ -75,16 +75,16 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
             { id: 43, user: '', userImage: '', text: '', date: '2026-04-30T11:12:00Z', replies: [] }, // Comentario de hace ~3 meses
             { id: 42, user: '', userImage: '', text: '', date: '2026-04-29T06:17:00Z', replies: [] }, // Comentario de hace ~3 meses
             { id: 41, user: '', userImage: '', text: '', date: '2026-04-27T11:29:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 40, user: '', userImage: '', text: '', date: '2026-04-26T06:02:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 39, user: '', userImage: '', text: '', date: '2026-04-23T11:08:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 38, user: '', userImage: '', text: '', date: '2026-04-15T05:07:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 37, user: '', userImage: '', text: '', date: '2026-04-14T11:25:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 36, user: '', userImage: '', text: '', date: '2026-04-09T06:07:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 35, user: '', userImage: '', text: '', date: '2026-04-07T11:25:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 34, user: '', userImage: '', text: '', date: '2026-04-02T06:07:00Z', replies: [] }, // Comentario de hace ~3 meses
-            { id: 33, user: '', userImage: '', text: '', date: '2026-03-28T23:01:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 32, user: '', userImage: '', text: '', date: '2026-03-27T13:28:00Z', replies: [] }, // Comentario de hace ~4 meses
-            { id: 31, user: '', userImage: '', text: '', date: '2026-03-25T02:08:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 40, user: '', userImage: '', text: 'La monetización ya no es un sueño lejano. Con esta guía estructuré mi canal para generar ingresos estables y escalables.', date: '2026-04-26T06:02:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 39, user: '', userImage: '', text: 'Aprender a construir un ecosistema digital con alto volumen de tráfico era lo que necesitaba para llevar mi marca al siguiente nivel.', date: '2026-04-23T11:08:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 38, user: '', userImage: '', text: 'Tengo un negocio de e-commerce y usar esta guía para promocionar mis productos fue la mejor decisión del año. ¡Excelente inversión!', date: '2026-04-15T05:07:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 37, user: '', userImage: '', text: 'Esta guía es el mejor curso de negocios. Te enseña a monetizar tu canal desde el día uno y a escalar tus ingresos.', date: '2026-04-14T11:25:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 36, user: '', userImage: '', text: 'Pude integrar mis productos de comercio electrónico a los Shorts de manera natural. ¡Las ventas se han disparad', date: '2026-04-09T06:07:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 35, user: '', userImage: '', text: 'La segmentación vertical que enseñan me ayudó a atraer al público ideal para monetizar mis ingresos de forma recurrente.', date: '2026-04-07T11:25:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 34, user: '', userImage: '', text: 'Por fin entiendo cómo construir un ecosistema sostenible! No solo gano vistas, sino que estoy creando un negocio escalable.', date: '2026-04-02T06:07:00Z', replies: [] }, // Comentario de hace ~3 meses
+            { id: 33, user: '', userImage: '', text: 'La forma en que explican el algoritmo para ganar visibilidad rápida es brillante. ¡Estoy muy feliz con los resultados de mi canal', date: '2026-03-28T23:01:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 32, user: '', userImage: '', text: 'Si quieres ganar seguidores calificados y participativos, esta guía te da el paso a paso exacto para lograrlo.', date: '2026-03-27T13:28:00Z', replies: [] }, // Comentario de hace ~4 meses
+            { id: 31, user: '', userImage: '', text: 'Mis videos pasaron de tener 50 vistas a miles. La estrategia de visibilidad que enseñan es completamente efectiva.', date: '2026-03-25T02:08:00Z', replies: [] }, // Comentario de hace ~4 meses
             { id: 30, user: '', userImage: '', text: 'Conseguir participación y comentarios ya no es un misterio. Las tácticas de esta guía realmente conectan con la gente.', date: '2026-03-20T12:15:00Z', replies: [] }, // Comentario de hace ~4 meses
             { id: 29, user: '', userImage: '', text: 'El crecimiento de mi audiencia ha sido explosivo. Esta guía te enseña exactamente cómo posicionarte rápido en YouTube.', date: '2026-03-17T01:55:00Z', replies: [] }, // Comentario de hace ~4 meses
             { id: 28, user: '', userImage: '', text: 'Quería que mi canal fuera más visible y esta guía me dio las claves exactas para dominar el feed de Shorts.', date: '2026-03-14T06:07:00Z', replies: [] }, // Comentario de hace ~4 meses
