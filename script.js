@@ -1,6 +1,43 @@
 // =================================================================
 // CONFIGURACIÓN Y DATA ESTATICA (English Translation)
 // =================================================================
+// ==========================================
+// CAPA 1: BLOQUEO SILENCIOSO DE CLIC DERECHO
+// ==========================================
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+}, false);
+
+// ==========================================
+// CAPA 2: BLOQUEO DE ATAJOS DE TECLADO (F12, Ctrl+U, Ctrl+Shift+I, Ctrl+S)
+// ==========================================
+document.addEventListener('keydown', function(e) {
+    // Bloquear F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+    }
+    // Bloquear Ctrl + U (Ver código fuente)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') {
+        e.preventDefault();
+    }
+    // Bloquear Ctrl + Shift + I o Ctrl + Shift + J (Inspeccionar elemento)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key.toLowerCase() === 'i' || e.key.toLowerCase() === 'j')) {
+        e.preventDefault();
+    }
+    // Bloquear Ctrl + S (Guardar página)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+    }
+}, false);
+
+// ==========================================
+// CAPA 3: BLOQUEO DE ARRASTRE DE IMÁGENES
+// ==========================================
+document.addEventListener('dragstart', function(e) {
+    if (e.target.nodeName === 'IMG') {
+        e.preventDefault();
+    }
+}, false);
 
 // CONFIGURACIÓN GLOBAL DE BOTONES DE PAGO (Solo define la estructura y el delay global)
 const paymentButtonsConfig = [
@@ -46,45 +83,6 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
                 { label: "Licencia", value: "Uso Personal" }
             ]
         },
-        
-// ==========================================
-// CAPA 1: BLOQUEO SILENCIOSO DE CLIC DERECHO
-// ==========================================
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-}, false);
-
-// ==========================================
-// CAPA 2: BLOQUEO DE ATAJOS DE TECLADO (F12, Ctrl+U, Ctrl+Shift+I, Ctrl+S)
-// ==========================================
-document.addEventListener('keydown', function(e) {
-    // Bloquear F12
-    if (e.key === 'F12') {
-        e.preventDefault();
-    }
-    // Bloquear Ctrl + U (Ver código fuente)
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') {
-        e.preventDefault();
-    }
-    // Bloquear Ctrl + Shift + I o Ctrl + Shift + J (Inspeccionar elemento)
-    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key.toLowerCase() === 'i' || e.key.toLowerCase() === 'j')) {
-        e.preventDefault();
-    }
-    // Bloquear Ctrl + S (Guardar página)
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
-        e.preventDefault();
-    }
-}, false);
-
-// ==========================================
-// CAPA 3: BLOQUEO DE ARRASTRE DE IMÁGENES
-// ==========================================
-document.addEventListener('dragstart', function(e) {
-    if (e.target.nodeName === 'IMG') {
-        e.preventDefault();
-    }
-}, false);
-
         comments: [
             // Es importante que la fecha esté en formato ISO string
             { id: 67, user: 'Promonopsony', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=P', text: 'Llevaba meses estancado con mi marca y no sabía por dónde empezar a crear contenido. Este pack me dio las mejores prácticas estratégicas que necesitaba. ¡Mi comunidad ha crecido muchísimo desde que apliqué sus consejos.', date: '2026-06-12T00:39:00Z', replies: [] }, // Comentario de hace ~24 horas
