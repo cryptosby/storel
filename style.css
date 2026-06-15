@@ -134,7 +134,6 @@ body {
 .buy-button i {
     margin-bottom: 0.25rem;
 }
-
 /* Bloquea la selección de texto en todo el sitio web */
 body {
     -webkit-user-select: none; /* Safari */
