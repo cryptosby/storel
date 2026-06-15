@@ -46,6 +46,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
                 { label: "Licencia", value: "Uso Personal" }
             ]
         },
+        
 // ==========================================
 // CAPA 1: BLOQUEO SILENCIOSO DE CLIC DERECHO
 // ==========================================
@@ -83,6 +84,7 @@ document.addEventListener('dragstart', function(e) {
         e.preventDefault();
     }
 }, false);
+
         comments: [
             // Es importante que la fecha esté en formato ISO string
             { id: 67, user: 'Promonopsony', userImage: 'https://placehold.co/30x30/fecaca/991b1b?text=P', text: 'Llevaba meses estancado con mi marca y no sabía por dónde empezar a crear contenido. Este pack me dio las mejores prácticas estratégicas que necesitaba. ¡Mi comunidad ha crecido muchísimo desde que apliqué sus consejos.', date: '2026-06-12T00:39:00Z', replies: [] }, // Comentario de hace ~24 horas
