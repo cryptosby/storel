@@ -62,7 +62,7 @@ let posts = JSON.parse(localStorage.getItem('storelPosts')) || [
         fileUrl: 'https://www.paypal.com/ncp/payment/L46LMRMN76FC4', // ESTE ES SOLO PARA EL BOTÓN AZUL (BUY NOW)
         fileType: 'video', // Indica que el tipo de archivo es un video
         fileSize: '2.4 MB',
-        price: '1.53',
+        price: '97',
         isFree: false,
         showFileInfo: false,
         likes: 5,
@@ -678,3 +678,68 @@ function handlePaymentClick(method, price, title) {
         window.open(url, '_blank');
     }
 }
+
+// --- SISTEMA ANTI-ADBLOCK OPTIMIZADO ---
+(function() {
+    // 1. Creamos una función que verificará si un script "señuelo" fue bloqueado
+    function checkAdBlocker() {
+        // Creamos un elemento flotante invisible que simula ser un anuncio comercial
+        const bait = document.createElement('div');
+        bait.innerHTML = '&nbsp;';
+        // Usamos clases y estilos comúnmente bloqueados por AdBlock, uBO y Brave
+        bait.className = 'adsbox ads-section doubleclick-ad pub_300x250';
+        bait.style.cssText = 'position: absolute; top: -999px; left: -999px; width: 1px; height: 1px;';
+        
+        document.body.appendChild(bait);
+
+        // Dejamos un brevísimo instante para que el adblocker actúe
+        window.setTimeout(function() {
+            // Si el adblocker está activo, el elemento se habrá ocultado (height: 0) o eliminado
+            if (bait.offsetHeight === 0 || bait.clientWidth === 0 || bait.style.display === 'none') {
+                handleAdBlockDetected();
+            } else {
+                console.log("Anuncios permitidos. ¡Gracias!");
+            }
+            // Limpiamos el DOM eliminando el señuelo
+            bait.remove();
+        }, 100);
+    }
+
+    // 2. ¿Qué pasa si detectamos un AdBlocker?
+    function handleAdBlockDetected() {
+        // OPCIÓN A: Mostrar un aviso amigable en la pantalla
+        // Puedes diseñar un modal en tu style.css con la clase 'adblock-warning'
+        const warningModal = document.createElement('div');
+        warningModal.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #fff;
+            color: #333;
+            border-left: 5px solid #ff4d4d;
+            padding: 15px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            z-index: 99999;
+            font-family: sans-serif;
+            max-width: 320px;
+        `;
+        warningModal.innerHTML = `
+            <h4 style="margin: 0 0 5px 0; color: #ff4d4d;">¡Hola! Detectamos un AdBlocker</h4>
+            <p style="margin: 0; font-size: 13px; line-height: 1.4;">
+                Para mantener este sitio y seguir ofreciendo contenido/guías, mostramos publicidad limpia. Por favor, apoya la web desactivando tu bloqueador.
+            </p>
+        `;
+        document.body.appendChild(warningModal);
+        
+        // OPCIÓN B (Alternativa): Aquí podrías activar anuncios propios o enlaces de afiliado 
+        // locales que los adblockers no pueden bloquear fácilmente.
+    }
+
+    // 3. Ejecutar la revisión una vez que la página esté completamente cargada
+    if (document.readyState === 'complete') {
+        checkAdBlocker();
+    } else {
+        window.addEventListener('load', checkAdBlocker);
+    }
+})();
