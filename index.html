@@ -62,5 +62,25 @@
     </div>
 
     <script src="script.js"></script>
+
+   <script>
+  // Abre el popunder de forma segura en una pestaña en segundo plano cuando el usuario hace clic
+  document.addEventListener('click', function() {
+      // Usamos una cookie o almacenamiento local para que solo se abra una vez por sesión y no moleste siempre
+      if (!sessionStorage.getItem('popunder_ejecutado')) {
+          var urlPop = "https://traffic2bitcoin.com/ptp2.php?ref=coinatm&allowpop=1";
+          
+          // Abre la URL en una nueva pestaña
+          var win = window.open(urlPop, '_blank');
+          
+          // Enfoca de nuevo tu tienda para que la publicidad quede "abajo" (popunder)
+          window.focus();
+          
+          // Guarda el registro para que no se repita en la misma sesión
+          sessionStorage.setItem('popunder_ejecutado', 'true');
+      }
+  });
+</script>
+    
 </body>
 </html>
