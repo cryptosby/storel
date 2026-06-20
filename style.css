@@ -141,3 +141,10 @@ body {
     -ms-user-select: none;     /* IE10+/Edge */
     user-select: none;         /* Estándar (Chrome, Opera, etc.) */
 }
+
+.ad-banner iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
