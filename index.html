@@ -64,19 +64,31 @@
     <script src="script.js"></script>
 
    <script>
-  // Abre el popunder de forma segura en una pestaña en segundo plano cuando el usuario hace clic
+  // Abre el popunder en una pestaña nueva en segundo plano (tanto en PC como en móvil)
   document.addEventListener('click', function() {
-      // Usamos una cookie o almacenamiento local para que solo se abra una vez por sesión y no moleste siempre
+      // Verifica si ya se abrió en esta sesión para no ser invasivo
       if (!sessionStorage.getItem('popunder_ejecutado')) {
           var urlPop = "https://traffic2bitcoin.com/ptp2.php?ref=coinatm&allowpop=1";
           
-          // Abre la URL en una nueva pestaña
-          var win = window.open(urlPop, '_blank');
+          // Creamos un enlace invisible en memoria
+          var link = document.createElement('a');
+          link.href = urlPop;
+          link.target = '_blank'; // Fuerza la apertura en una pestaña nueva
+          link.rel = 'noopener noreferrer'; // Por seguridad y rendimiento
           
-          // Enfoca de nuevo tu tienda para que la publicidad quede "abajo" (popunder)
+          // Añadimos el enlace al documento temporalmente para que el móvil lo procese bien
+          document.body.appendChild(link);
+          
+          // Simulamos el clic real en el enlace
+          link.click();
+          
+          // Lo removemos del código inmediatamente para que quede limpio
+          document.body.removeChild(link);
+          
+          // Enfocamos de nuevo tu tienda (en PC volverá al frente; en móvil dejará la pestaña cargando)
           window.focus();
           
-          // Guarda el registro para que no se repita en la misma sesión
+          // Guardamos el registro en la sesión
           sessionStorage.setItem('popunder_ejecutado', 'true');
       }
   });
