@@ -93,48 +93,6 @@
       }
   });
 </script>
-
-    <script>
-  window.addEventListener('DOMContentLoaded', () => {
-    // ==========================================
-    // CONFIGURACIÓN MODIFICABLE
-    // ==========================================
-    
-    // 1. Tiempos en SEGUNDOS cuando deseas que se ejecute el clic (contando desde que carga la página)
-    // Puedes agregar, quitar o cambiar los números como quieras.
-    const intervalosSegundos = [10]; 
-
-    // 2. Elige el elemento que recibirá el clic.
-    // Actualmente está configurado para hacer clic en TODO el cuerpo (body) de la página.
-    // Si quieres un botón específico, cambia 'body' por el ID de tu botón (ej. '#mi-boton')
-    const selectorElemento = 'body'; 
-
-    // ==========================================
-    // LÓGICA DEL SCRIPT (No es necesario modificar)
-    // ==========================================
-    const elementoObjetivo = document.querySelector(selectorElemento);
-
-    if (elementoObjetivo) {
-      console.log("Autoclick iniciado. Programados " + intervalosSegundos.length + " clics.");
-
-      intervalosSegundos.forEach((segundos) => {
-        setTimeout(() => {
-          // Crea y simula el evento de clic nativo
-          const eventoClic = new MouseEvent('click', {
-            view: window,
-            bubbles: true,
-            cancelable: true
-          });
-          
-          elementoObjetivo.dispatchEvent(eventoClic);
-          console.log(`[Autoclick] Clic automático ejecutado a los ${segundos} segundos.`);
-        }, segundos * 1000); // Convierte segundos a milisegundos
-      });
-    } else {
-      console.warn(`[Autoclick] No se encontró el elemento con el selector: "${selectorElemento}"`);
-    }
-  });
-</script>
     
 </body>
 </html>
